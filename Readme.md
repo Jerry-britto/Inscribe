@@ -1,6 +1,6 @@
 # CIA-2 SE Project
 
-# Group members
+## Group members
 Project Manger - Isha Tanna
 
 Developers
