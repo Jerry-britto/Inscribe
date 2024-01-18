@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text(
-          "My Account",
+          "Welcome back",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -106,6 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             icon: const Icon(Icons.remove_red_eye_sharp))),
                     obscureText: isVisible,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -114,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: const Text(
                           "Forgot password",
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.black),
                         )),
                   ),
                   const SizedBox(
@@ -125,11 +129,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: FloatingActionButton(
                         backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
                         onPressed: () {
-                          if(_formKey.currentState!.validate()){
-                             ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
+                          if (_formKey.currentState!.validate()) {
+                            //Authenticate the user
+                            FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: email.text, password: password.text)
+                                .then((val) {
+                              //Navigate to home page
+                            }).onError((error, stackTrace) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text("Failed to Login"),
+                                        content: Text(error.toString()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ));
+                            });
                           }
+                          email.text = password.text = "";
                         },
                         child: const Text(
                           "Login",
@@ -139,24 +163,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                        child: Image.asset("assets/images/google_icon.webp"),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        "Sign in with Google",
-                        style: TextStyle(color: Colors.blue),
-                      )
-                    ],
+                  TextButton.icon(
+                    onPressed: () {
+                      // Sign in with Google
+                    },
+                    icon: SizedBox(
+                      height: 20,
+                      child: Image.asset("assets/images/google_icon.webp"),
+                    ),
+                    label: const Text(
+                      "Sign in with Google",
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -164,9 +185,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text(
                         "Don't have a account ?",
                         style: TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(
-                        width: 0,
                       ),
                       TextButton(
                           onPressed: () {
