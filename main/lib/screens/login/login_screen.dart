@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:main/screens/login/forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -114,7 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                         onPressed: () {
-                          print("Forgot password");
+                          Navigator.push(context, 
+                          MaterialPageRoute(builder: (_)=>const ForgotPasswordScreen())
+                          );
                         },
                         child: const Text(
                           "Forgot password",
@@ -142,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (BuildContext context) =>
                                       AlertDialog(
                                         title: const Text("Failed to Login"),
-                                        content: Text(error.toString()),
+                                        content: const Text("Invalid credentials"),
                                         actions: [
                                           TextButton(
                                             onPressed: () =>
@@ -150,7 +153,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: const Text('OK'),
                                           ),
                                         ],
-                                      ));
+                                      )
+                                      );
                             });
                           }
                           email.text = password.text = "";
@@ -194,7 +198,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Sign up",
                             style:
                                 TextStyle(color: Color.fromRGBO(162, 7, 48, 1)),
-                          ))
+                          )
+                          )
                     ],
                   )
                 ],
