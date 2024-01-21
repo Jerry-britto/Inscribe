@@ -14,6 +14,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
+  bool _isHovered = false;
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -113,16 +115,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.push(context, 
-                          MaterialPageRoute(builder: (_)=>const ForgotPasswordScreen())
-                          );
-                        },
-                        child: const Text(
-                          "Forgot password",
-                          style: TextStyle(color: Colors.black),
-                        )),
+                    child: MouseRegion(
+                      onEnter: (event) => setState(() => _isHovered = true),
+                      onExit: (event) => setState(() => _isHovered = false),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forgot Password',
+                          style: TextStyle(
+                              color: _isHovered
+                                  ? const Color.fromRGBO(66, 140, 236, 1)
+                                  : Colors.black),
+                        ),
+                      ),
+                      // child: TextButton(
+                      //     onPressed: () {
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (_) =>
+                      //                   const ForgotPasswordScreen()));
+                      //     },
+                      //     child: const Text(
+                      //       "Forgot password",
+                      //       style: TextStyle(color: Colors.black),
+                      //     )),
+                    ),
                   ),
                   const SizedBox(
                     height: 6,
@@ -145,7 +163,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (BuildContext context) =>
                                       AlertDialog(
                                         title: const Text("Failed to Login"),
-                                        content: const Text("Invalid credentials"),
+                                        content:
+                                            const Text("Invalid credentials"),
                                         actions: [
                                           TextButton(
                                             onPressed: () =>
@@ -153,8 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             child: const Text('OK'),
                                           ),
                                         ],
-                                      )
-                                      );
+                                      ));
                             });
                           }
                           email.text = password.text = "";
@@ -198,12 +216,42 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Sign up",
                             style:
                                 TextStyle(color: Color.fromRGBO(162, 7, 48, 1)),
-                          )
-                          )
+                          ))
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )));
+          )),
+      // floatingActionButton: Align(
+      //   alignment : Alignment.bottomLeft,
+      //   child: FloatingActionButton(
+      //     onPressed: () {},
+      //     backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+      //     tooltip: 'Admin',
+      //     shape: const CircleBorder(
+      //         side: BorderSide(
+      //             color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
+      //         eccentricity: 1.0),
+      //     child: const Icon(
+      //       Icons.admin_panel_settings_outlined,
+      //       color: Colors.white,
+      //     ),
+      floatingActionButton: Positioned(
+        bottom: 16.0,
+        left: 16.0,
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+          tooltip: 'Admin',
+          shape: const CircleBorder(
+              side: BorderSide(
+                  color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
+              eccentricity: 1.0),
+          child: const Icon(
+            Icons.admin_panel_settings_outlined,
+            color: Colors.white,
+          ),
+        ),
+      ));
 }
