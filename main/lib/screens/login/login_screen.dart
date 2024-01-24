@@ -119,7 +119,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       onEnter: (event) => setState(() => _isHovered = true),
                       onExit: (event) => setState(() => _isHovered = false),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      const ForgotPasswordScreen()));
+                        },
                         child: Text(
                           'Forgot Password',
                           style: TextStyle(
@@ -128,18 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   : Colors.black),
                         ),
                       ),
-                      // child: TextButton(
-                      //     onPressed: () {
-                      //       Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //               builder: (_) =>
-                      //                   const ForgotPasswordScreen()));
-                      //     },
-                      //     child: const Text(
-                      //       "Forgot password",
-                      //       style: TextStyle(color: Colors.black),
-                      //     )),
                     ),
                   ),
                   const SizedBox(
@@ -223,35 +217,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           )),
-      // floatingActionButton: Align(
-      //   alignment : Alignment.bottomLeft,
-      //   child: FloatingActionButton(
-      //     onPressed: () {},
-      //     backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
-      //     tooltip: 'Admin',
-      //     shape: const CircleBorder(
-      //         side: BorderSide(
-      //             color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
-      //         eccentricity: 1.0),
-      //     child: const Icon(
-      //       Icons.admin_panel_settings_outlined,
-      //       color: Colors.white,
-      //     ),
-      floatingActionButton: Positioned(
-        bottom: 16.0,
-        left: 16.0,
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
-          tooltip: 'Admin',
-          shape: const CircleBorder(
-              side: BorderSide(
-                  color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
-              eccentricity: 1.0),
-          child: const Icon(
-            Icons.admin_panel_settings_outlined,
-            color: Colors.white,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+        tooltip: 'Admin',
+        shape: const CircleBorder(
+            side:
+                BorderSide(color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
+            eccentricity: 1.0),
+        child: const Icon(
+          Icons.admin_panel_settings_outlined,
+          color: Colors.white,
         ),
-      ));
+      ),
+      );
 }
