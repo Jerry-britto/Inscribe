@@ -58,7 +58,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               onPressed: () async{
                await passwordReset(emailController.text.toLowerCase().trim());
               },
-              child: const Text("Forgot"),
+              child: const Text("Get Password Reset Link"),
             )
           ],
         ),
