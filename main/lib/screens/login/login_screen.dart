@@ -74,7 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
     print(userDetails?.displayName);
     print(userDetails?.email);
     GoogleSignIn().disconnect();
-  }
+
+    
+    
+}
 
   @override
   Widget build(BuildContext context) => Scaffold(
