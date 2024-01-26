@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:main/screens/login/login_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -52,6 +53,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     }
   }
+
+   signInWithGoogle() async {
+    final  googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+
+    final GoogleSignInAuthentication? googleSignInAuthentication =
+        await googleSignInAccount?.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      idToken: googleSignInAuthentication?.idToken,
+      accessToken: googleSignInAuthentication?.accessToken,
+    );
+
+    UserCredential result =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    User? userDetails = result.user;
+    print(userDetails?.displayName);
+    print(userDetails?.email);
+    GoogleSignIn().disconnect();
+}
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -239,6 +263,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 24,
                   ),
+                  TextButton.icon(
+                      onPressed: () {
+                        // Sign in with Google
+                        signInWithGoogle();
+                      },
+                      icon: SizedBox(
+                        height: 20,
+                        child: Image.asset("assets/images/google_icon.webp"),
+                      ),
+                      label: const Text(
+                        "Sign up with Google",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
                   const SizedBox(
                     height: 5,
                   ),
