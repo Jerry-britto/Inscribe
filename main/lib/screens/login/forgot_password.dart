@@ -10,24 +10,44 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final emailController = TextEditingController();
-  Future passwordReset(String email) async{
+  Future passwordReset(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       // ignore: use_build_context_synchronously
-      showDialog(context: context, builder: (_) =>   AlertDialog(content: const Text("Password Reset link sent! Check your email"),
-      actions: [TextButton(onPressed: (){Navigator.pop(context);}, child: const Text("Ok"))], 
-      ));
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                content:
+                    const Text("Password Reset link sent! Check your email"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Ok"))
+                ],
+              ));
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       // ignore: use_build_context_synchronously
-      showDialog(context: context, builder: (_) =>   AlertDialog(content: Text(e.message.toString()),
-      actions: [TextButton(onPressed: (){Navigator.pop(context);}, child: const Text("Ok"))], 
-      ));
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                content: Text(e.message.toString()),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Ok"))
+                ],
+              ));
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Forgot Password"),
         centerTitle: true,
@@ -37,28 +57,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         child: Column(
           children: <Widget>[
             TextFormField(
-               validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Kindly enter your email";
-                      } else if (!RegExp(
-                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-                          .hasMatch(value)) {
-                        return "Invalid Email";
-                      } else {
-                        return null;
-                      }
-                    },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Kindly enter your email";
+                } else if (!RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+                    .hasMatch(value)) {
+                  return "Invalid Email";
+                } else {
+                  return null;
+                }
+              },
               controller: emailController,
               decoration: const InputDecoration(
                 hintText: "Enter email",
               ),
             ),
-            const SizedBox(height: 20,),
-            FloatingActionButton(
-              onPressed: () async{
-               await passwordReset(emailController.text.toLowerCase().trim());
+            const SizedBox(
+              height: 20,
+            ),
+            FloatingActionButton.extended(
+              onPressed: () async {
+                await passwordReset(emailController.text.toLowerCase().trim());
               },
-              child: const Text("Get Password Reset Link"),
+              label: const Text("Reset your password"),
             )
           ],
         ),
