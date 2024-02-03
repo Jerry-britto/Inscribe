@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:main/screens/details_pages/scribe_details.dart';
+import 'package:main/screens/details_pages/swd_details.dart';
 import 'package:main/screens/login/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -207,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                           decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            enabledBorder: OutlineInputBorder(
+                            border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(50)),
                               borderSide:
                                     BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
@@ -234,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              enabledBorder: const OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(50)),
                                 borderSide:
                                     BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
@@ -271,7 +273,7 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              enabledBorder: const OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(50)),
                                 borderSide:
                                     BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
@@ -302,6 +304,22 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   registerUser(email.text, cnfpassword.text);
+                                  if(toggleValue==false)
+                                  {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => Details_Form(emailText: email.text),
+                                      ),
+                                    );
+                                  }
+                                  else if(toggleValue==true)
+                                  {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => Details_Form2(emailText: email.text),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               child: const Text(
