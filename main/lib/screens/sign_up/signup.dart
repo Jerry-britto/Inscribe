@@ -67,8 +67,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         createUser();
-        // Navigate user to home
+        // Navigate user to details page
         print("User signed up");
+        if (toggleValue == false) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DetailsForm(emailText: email),
+            ),
+          );
+        } else if (toggleValue == true) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DetailsForm2(emailText: email),
+            ),
+          );
+        }
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -110,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             SizedBox(
                               height: 100,
@@ -302,21 +315,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   registerUser(email.text, cnfpassword.text);
-                                  if (toggleValue == false) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailsForm(emailText: email.text),
-                                      ),
-                                    );
-                                  } else if (toggleValue == true) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailsForm2(emailText: email.text),
-                                      ),
-                                    );
-                                  }
                                 }
                               },
                               child: const Text(

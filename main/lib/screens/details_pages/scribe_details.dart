@@ -3,8 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DetailsForm2 extends StatefulWidget {
   const DetailsForm2({super.key, required this.emailText});
-  // ignore: prefer_typing_uninitialized_variables
-  final emailText;
+  final String emailText;
   @override
   // ignore: no_logic_in_create_state
   State<DetailsForm2> createState() => _DetailsFormState2(emailText);

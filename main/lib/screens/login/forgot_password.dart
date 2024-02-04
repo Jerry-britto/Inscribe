@@ -10,38 +10,26 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final emailController = TextEditingController();
+  displayMessage(String message) => showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            content: Text(message),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Ok"))
+            ],
+          ));
   Future passwordReset(String email) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      // ignore: use_build_context_synchronously
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                content:
-                    const Text("Password Reset link sent! Check your email"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("Ok"))
-                ],
-              ));
-    } on FirebaseAuthException catch (e) {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email).then(
+          (value) =>
+              displayMessage("Password Reset link sent! Check your email"));
+    } catch (e) {
+      displayMessage("Failed to send the pasword reset link");
       print(e.toString());
-      // ignore: use_build_context_synchronously
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                content: Text(e.message.toString()),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("Ok"))
-                ],
-              ));
     }
   }
 
