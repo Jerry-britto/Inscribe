@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:main/firebase_options.dart';
 
-class Details_Form2 extends StatefulWidget {
-  Details_Form2({required this.emailText});
+class DetailsForm2 extends StatefulWidget {
+  const DetailsForm2({super.key, required this.emailText});
+  // ignore: prefer_typing_uninitialized_variables
   final emailText;
   @override
-  State<Details_Form2> createState() => _Details_FormState2(emailText);
+  // ignore: no_logic_in_create_state
+  State<DetailsForm2> createState() => _DetailsFormState2(emailText);
 }
 
-class _Details_FormState2 extends State<Details_Form2> {
-  _Details_FormState2(this.emailText);
+class _DetailsFormState2 extends State<DetailsForm2> {
+  _DetailsFormState2(this.emailText);
   String emailText;
   // bool enabled = false;
-  var _formKey = GlobalKey<FormState>();
-  var _name = TextEditingController();
-  var _email = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _name = TextEditingController();
+  final _email = TextEditingController();
   var _age = 0;
   var _uid = 0;
   var _contact = '';
-  String _yearValue='Select';
-  String _courseValue='Select';
-  
+  String _yearValue = 'Select';
+  String _courseValue = 'Select';
+
   // List of items in our dropdown menus
-  var year_items = [
+  var yearItems = [
     'Select',
     'FYJC',
     'SYJC',
@@ -34,7 +34,7 @@ class _Details_FormState2 extends State<Details_Form2> {
     'Masters',
   ];
 
-  var course_items = [
+  var courseItems = [
     'Select',
     'Arts',
     'Science',
@@ -49,28 +49,24 @@ class _Details_FormState2 extends State<Details_Form2> {
     'Other(Masters)',
   ];
 
-  var _validationMessage="";
+  var _validationMessage = "";
 
-  dropDownValidate()
-  {
+  dropDownValidate() {
     setState(() {
-      if((_yearValue=='Select')||(_courseValue=='Select'))
-      {
-        _validationMessage="Please Enter Valid Dropdown Option/s";
-      }
-      else{
-        _validationMessage="";
+      if ((_yearValue == 'Select') || (_courseValue == 'Select')) {
+        _validationMessage = "Please Enter Valid Dropdown Option/s";
+      } else {
+        _validationMessage = "";
       }
     });
   }
 
   addDetails() {
-
     CollectionReference colref =
         FirebaseFirestore.instance.collection('Scribes');
 
-    Map<String, dynamic> scribes_map = {
-      "email":_email.text,
+    Map<String, dynamic> scribesMap = {
+      "email": _email.text,
       "name": _name.text,
       "age": _age,
       "uid": _uid,
@@ -81,7 +77,7 @@ class _Details_FormState2 extends State<Details_Form2> {
 
     colref
         .doc(_email.text)
-        .set(scribes_map)
+        .set(scribesMap)
         .then((value) => print("Details Added"))
         .catchError((error) => print("Failed to add details : $error"));
   }
@@ -94,13 +90,14 @@ class _Details_FormState2 extends State<Details_Form2> {
           appBar: AppBar(
             leading: BackButton(
               color: Colors.white,
-              onPressed:(){
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text("Details Form",
+            title: const Text(
+              "Details Form",
               style: TextStyle(
-              color: Colors.white,
+                color: Colors.white,
               ),
             ),
             backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
@@ -125,7 +122,8 @@ class _Details_FormState2 extends State<Details_Form2> {
                                 height: 20,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
                                     height: 100,
@@ -136,22 +134,28 @@ class _Details_FormState2 extends State<Details_Form2> {
                                   const Column(
                                     children: <Widget>[
                                       Center(
-                                        child: Text(
-                                          "Welcome Dear Scribe!",
-                                          style: TextStyle(fontSize: 22, color: Color.fromRGBO(162,7,48,1), fontWeight: FontWeight.bold)
-                                        ),
+                                        child: Text("Welcome Dear Scribe!",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Color.fromRGBO(
+                                                    162, 7, 48, 1),
+                                                fontWeight: FontWeight.bold)),
                                       ),
                                       Center(
-                                        child: Text(
-                                          "Your Contribution",
-                                          style: TextStyle(fontSize: 22, color: Color.fromRGBO(162,7,48,1), fontWeight: FontWeight.bold)
-                                        ),
+                                        child: Text("Your Contribution",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Color.fromRGBO(
+                                                    162, 7, 48, 1),
+                                                fontWeight: FontWeight.bold)),
                                       ),
                                       Center(
-                                        child: Text(
-                                          "is Greatly Valued!",
-                                          style: TextStyle(fontSize: 22, color: Color.fromRGBO(162,7,48,1), fontWeight: FontWeight.bold)
-                                        ),
+                                        child: Text("is Greatly Valued!",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Color.fromRGBO(
+                                                    162, 7, 48, 1),
+                                                fontWeight: FontWeight.bold)),
                                       ),
                                     ],
                                   ),
@@ -163,7 +167,10 @@ class _Details_FormState2 extends State<Details_Form2> {
                               ),
                               const Text(
                                 "Basic Details:",
-                                style: TextStyle(fontSize: 18, color: Color.fromRGBO(162,7,48,1), decoration: TextDecoration.underline),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color.fromRGBO(162, 7, 48, 1),
+                                    decoration: TextDecoration.underline),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -173,18 +180,24 @@ class _Details_FormState2 extends State<Details_Form2> {
                                 decoration: const InputDecoration(
                                   labelText: "Name",
                                   hintText: "Enter Full Name",
-                                  labelStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
+                                  labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
                                   hintStyle: TextStyle(fontSize: 15),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide:
-                                          BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(71, 71, 71, 1)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(width:1.5, color: Color.fromRGBO(162, 7, 48, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        width: 1.5,
+                                        color: Color.fromRGBO(162, 7, 48, 1)),
                                   ),
                                 ),
                                 controller: _name,
@@ -220,16 +233,23 @@ class _Details_FormState2 extends State<Details_Form2> {
                                   hintText: "Enter Age",
                                   hintStyle: TextStyle(fontSize: 15),
                                   labelText: "Age",
-                                    labelStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
+                                  labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(71, 71, 71, 1)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(width:1.5, color: Color.fromRGBO(162, 7, 48, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        width: 1.5,
+                                        color: Color.fromRGBO(162, 7, 48, 1)),
                                   ),
                                 ),
                               ),
@@ -259,16 +279,23 @@ class _Details_FormState2 extends State<Details_Form2> {
                                   hintText: "Enter UID (Roll No for JC)",
                                   hintStyle: TextStyle(fontSize: 15),
                                   labelText: "UID / Roll No",
-                                  labelStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
+                                  labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(71, 71, 71, 1)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(width:1.5, color: Color.fromRGBO(162, 7, 48, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        width: 1.5,
+                                        color: Color.fromRGBO(162, 7, 48, 1)),
                                   ),
                                 ),
                               ),
@@ -280,30 +307,36 @@ class _Details_FormState2 extends State<Details_Form2> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(color:const Color.fromRGBO(77,77,77,1)),
+                                  border: Border.all(
+                                      color:
+                                          const Color.fromRGBO(77, 77, 77, 1)),
                                   color: Colors.white,
                                 ),
                                 child: Row(
-                                  children:<Widget>[
-                                    const SizedBox(width:10),
+                                  children: <Widget>[
+                                    const SizedBox(width: 10),
                                     const Text(
                                       "Year: ",
-                                      style: TextStyle(color: Color.fromRGBO(162,7,48,1), fontSize: 20),
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(162, 7, 48, 1),
+                                          fontSize: 20),
                                     ),
-                                    const SizedBox(width:190),
+                                    const SizedBox(width: 190),
                                     DropdownButton<String>(
                                       dropdownColor: Colors.white,
-                                      style: const TextStyle(color: Color.fromRGBO(162, 7, 48, 1)),
-                                      value: _yearValue,  
-                                      icon: const Icon(Icons.keyboard_arrow_down),
-                                      items: year_items.map((String year_items) { 
-                                        return DropdownMenuItem( 
-                                          value: year_items, 
-                                          child: Text(year_items), 
-                                        ); 
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(162, 7, 48, 1)),
+                                      value: _yearValue,
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      items: yearItems.map((String yearItem) {
+                                        return DropdownMenuItem(
+                                          value: yearItem,
+                                          child: Text(yearItem),
+                                        );
                                       }).toList(),
-                                      onChanged: (String? value) =>
-                                        setState(() => _yearValue = value.toString()),
+                                      onChanged: (String? value) => setState(
+                                          () => _yearValue = value.toString()),
                                     ),
                                   ],
                                 ),
@@ -316,48 +349,61 @@ class _Details_FormState2 extends State<Details_Form2> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(color:const Color.fromRGBO(77,77,77,1)),
+                                  border: Border.all(
+                                      color:
+                                          const Color.fromRGBO(77, 77, 77, 1)),
                                   color: Colors.white,
                                 ),
-                                child:Row(
-                                  children:<Widget>[
-                                    const SizedBox(width:10),
+                                child: Row(
+                                  children: <Widget>[
+                                    const SizedBox(width: 10),
                                     const Text(
                                       "Course: ",
-                                      style: TextStyle(color: Color.fromRGBO(162,7,48,1), fontSize: 20),
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(162, 7, 48, 1),
+                                          fontSize: 20),
                                     ),
-                                    const SizedBox(width:170),
+                                    const SizedBox(width: 170),
                                     DropdownButton<String>(
                                       dropdownColor: Colors.white,
-                                      style: const TextStyle(color: Color.fromRGBO(162, 7, 48, 1)),
-                                      value: _courseValue,  
-                                      icon: const Icon(Icons.keyboard_arrow_down),
-                                      items: course_items.map((String items) { 
-                                        return DropdownMenuItem( 
-                                          value: items, 
-                                          child: Text(items), 
-                                        ); 
+                                      style: const TextStyle(
+                                          color: Color.fromRGBO(162, 7, 48, 1)),
+                                      value: _courseValue,
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      items: courseItems.map((String items) {
+                                        return DropdownMenuItem(
+                                          value: items,
+                                          child: Text(items),
+                                        );
                                       }).toList(),
-                                      onChanged: (String? value) =>
-                                        setState(() => _courseValue = value.toString()),
+                                      onChanged: (String? value) => setState(
+                                          () =>
+                                              _courseValue = value.toString()),
                                       //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
                                     ),
                                   ],
                                 ),
                               ),
 
-                              
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(_validationMessage, textAlign:TextAlign.left, style: const TextStyle(color: Color.fromRGBO(162,7,48,1), fontSize: 12)),
+                              Text(_validationMessage,
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                      color: Color.fromRGBO(162, 7, 48, 1),
+                                      fontSize: 12)),
                               const SizedBox(
                                 height: 30,
                               ),
 
                               const Text(
                                 "Contact Details:",
-                                style: TextStyle(fontSize: 18, color: Color.fromRGBO(162,7,48,1), decoration: TextDecoration.underline),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color.fromRGBO(162, 7, 48, 1),
+                                    decoration: TextDecoration.underline),
                               ),
 
                               const SizedBox(
@@ -370,12 +416,16 @@ class _Details_FormState2 extends State<Details_Form2> {
                                 readOnly: true,
                                 decoration: const InputDecoration(
                                   labelText: "Email",
-                                  labelStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
+                                  labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
                                   filled: true,
                                   fillColor: Colors.white,
                                   disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(71, 71, 71, 1)),
                                   ),
                                 ),
                               ),
@@ -405,37 +455,46 @@ class _Details_FormState2 extends State<Details_Form2> {
                                 },
                                 decoration: const InputDecoration(
                                   labelText: "Phone No",
-                                    hintText: "Enter Phone No.",
-                                    labelStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
-                                    hintStyle: TextStyle(fontSize: 15),
+                                  hintText: "Enter Phone No.",
+                                  labelStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
+                                  hintStyle: TextStyle(fontSize: 15),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide:
-                                          BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(71, 71, 71, 1)),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                                    borderSide: BorderSide(width:1.5, color: Color.fromRGBO(162, 7, 48, 1)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    borderSide: BorderSide(
+                                        width: 1.5,
+                                        color: Color.fromRGBO(162, 7, 48, 1)),
                                   ),
                                 ),
                               ),
-                              
+
                               const SizedBox(
                                 height: 30,
                               ),
                               // Submit Form Button
                               ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(const Color.fromRGBO(162,7,48,1)),
-                                  foregroundColor: MaterialStateProperty.all<Color>(
-                                      Colors.white),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromRGBO(162, 7, 48, 1)),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
                                 ),
                                 onPressed: () {
                                   dropDownValidate();
-                                  if ((_formKey.currentState!.validate() == true)&&(_validationMessage=="")) {
+                                  if ((_formKey.currentState!.validate() ==
+                                          true) &&
+                                      (_validationMessage == "")) {
                                     print("'submit' button pressed");
                                     addDetails();
                                   }
@@ -453,13 +512,11 @@ class _Details_FormState2 extends State<Details_Form2> {
           )),
     );
   }
-  
+
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
 
-    _email.text=emailText;
+    _email.text = emailText;
   }
 }
-

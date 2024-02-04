@@ -12,8 +12,7 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen>  {
-
+class _SignUpScreenState extends State<SignUpScreen> {
   bool isVisible = true;
   bool isVisible2 = true;
   final _formKey = GlobalKey<FormState>();
@@ -23,29 +22,24 @@ class _SignUpScreenState extends State<SignUpScreen>  {
   bool toggleValue = false;
 
   createUser() {
-    if(toggleValue==false) {
+    if (toggleValue == false) {
       final colref =
           FirebaseFirestore.instance.collection('SWD').doc(email.text);
 
-      Map<String, dynamic> swd_map = {
-        "email":email.text
-      };
+      Map<String, dynamic> swdMap = {"email": email.text};
 
       colref
-          .set(swd_map)
+          .set(swdMap)
           .then((value) => print("SWD Added"))
           .catchError((error) => print("Failed to add SWD : $error"));
-    }
-    else {
+    } else {
       final colref =
           FirebaseFirestore.instance.collection('Scribes').doc(email.text);
 
-      Map<String, dynamic> scribes_map = {
-        "email":email.text
-      };
+      Map<String, dynamic> scribesMap = {"email": email.text};
 
       colref
-          .set(scribes_map)
+          .set(scribesMap)
           .then((value) => print("Scribe Added"))
           .catchError((error) => print("Failed to add Scribe : $error"));
     }
@@ -72,13 +66,13 @@ class _SignUpScreenState extends State<SignUpScreen>  {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-            createUser();
+        createUser();
         // Navigate user to home
         print("User signed up");
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        displayMessage('The password provided is too weak.');
+        displayMessage('The password should be more than 6 characters.');
       } else if (e.code == 'email-already-in-use') {
         displayMessage('The account already exists for that email.');
       } else {
@@ -89,26 +83,26 @@ class _SignUpScreenState extends State<SignUpScreen>  {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Create an Account",
-          style: TextStyle(
-            color: Colors.white,
+        appBar: AppBar(
+          title: const Text(
+            "Create an Account",
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
+          centerTitle: true,
+          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
         ),
-        centerTitle: true,
-        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(227, 161, 43, 0.3),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: SingleChildScrollView(
-                child: Form(
+        body: Container(
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(227, 161, 43, 0.3),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                    child: Form(
                   key: _formKey,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -135,33 +129,39 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                         const SizedBox(
                           height: 20,
                         ),
-            
                         Center(
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            height:50.0,
-                            width:280.0,
-                            
+                            height: 50.0,
+                            width: 280.0,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xCCA20730)),
+                              border:
+                                  Border.all(color: const Color(0xCCA20730)),
                               borderRadius: BorderRadius.circular(40.0),
                               color: Colors.white,
                             ),
-            
                             child: Stack(
-                              children:<Widget>[
+                              children: <Widget>[
                                 const Center(
                                   child: Row(
                                     children: <Widget>[
-                                      SizedBox(width:60),
-                                      Text("SWD", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-                                      SizedBox(width:90),
-                                      Text("Scribe", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+                                      SizedBox(width: 60),
+                                      Text("SWD",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(width: 90),
+                                      Text("Scribe",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
                                 AnimatedPositioned(
-                                  duration: const Duration(milliseconds:300),
+                                  duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                   top: 5.0,
                                   left: toggleValue ? 125.0 : 0.0,
@@ -170,17 +170,22 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                                   child: InkWell(
                                     onTap: toggleButton,
                                     child: AnimatedSwitcher(
-                                      duration: const Duration(milliseconds: 300),
+                                      duration:
+                                          const Duration(milliseconds: 300),
                                       child: Container(
                                         width: 140.0,
                                         height: 40.0,
                                         decoration: ShapeDecoration(
-                                          color: Color(0xCCA20730).withOpacity(0.2),
+                                          color: const Color(0xCCA20730)
+                                              .withOpacity(0.2),
                                           shape: RoundedRectangleBorder(
-                                            side: const BorderSide(width: 1, color: Color(0xCCA20730)),
-                                            borderRadius: BorderRadius.circular(40),
+                                            side: const BorderSide(
+                                                width: 1,
+                                                color: Color(0xCCA20730)),
+                                            borderRadius:
+                                                BorderRadius.circular(40),
                                           ),
-                                        ),  
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -189,7 +194,6 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                             ),
                           ),
                         ),
-            
                         const SizedBox(
                           height: 20,
                         ),
@@ -206,21 +210,18 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                               return null;
                             }
                           },
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(50)),
-                              borderSide:
-                                    BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(50)),
-                              borderSide: BorderSide(width:1.5, color: Color.fromRGBO(162, 7, 48, 1)),
-                            ),
-                            hintText: "Enter Email",
-                            prefixIcon: Icon(Icons.mail),
-                          ),
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromRGBO(162, 7, 48, 1),
+                                      width: 3),
+                                  borderRadius: BorderRadius.circular(20)),
+                              hintText: "Enter Email",
+                              prefixIcon: const Icon(Icons.mail)),
                         ),
                         const SizedBox(
                           height: 25,
@@ -236,16 +237,13 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50)),
-                                borderSide:
-                                    BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50)),
-                                borderSide:
-                                    BorderSide(color: Color.fromRGBO(162, 7, 48, 1), width: 1.5),
-                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromRGBO(162, 7, 48, 1),
+                                      width: 3),
+                                  borderRadius: BorderRadius.circular(20)),
                               hintText: "Enter Password",
                               prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
@@ -254,7 +252,8 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                                       isVisible = !isVisible;
                                     });
                                   },
-                                  icon: const Icon(Icons.remove_red_eye_sharp))),
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_sharp))),
                           obscureText: isVisible,
                         ),
                         const SizedBox(
@@ -273,17 +272,14 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50)),
-                                borderSide:
-                                    BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50)),
-                                borderSide:
-                                    BorderSide(color: Color.fromRGBO(162, 7, 48, 1), width: 1.5),
-                              ),
-                              hintText: "Re-enter Password",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromRGBO(162, 7, 48, 1),
+                                      width: 3),
+                                  borderRadius: BorderRadius.circular(20)),
+                              hintText: "Enter Password",
                               prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
                                   onPressed: () {
@@ -291,7 +287,8 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                                       isVisible2 = !isVisible2;
                                     });
                                   },
-                                  icon: const Icon(Icons.remove_red_eye_sharp))),
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_sharp))),
                           obscureText: isVisible2,
                         ),
                         const SizedBox(
@@ -300,23 +297,23 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                         SizedBox(
                           width: double.infinity,
                           child: FloatingActionButton(
-                              backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(162, 7, 48, 1),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   registerUser(email.text, cnfpassword.text);
-                                  if(toggleValue==false)
-                                  {
+                                  if (toggleValue == false) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => Details_Form(emailText: email.text),
+                                        builder: (context) =>
+                                            DetailsForm(emailText: email.text),
                                       ),
                                     );
-                                  }
-                                  else if(toggleValue==true)
-                                  {
+                                  } else if (toggleValue == true) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => Details_Form2(emailText: email.text),
+                                        builder: (context) =>
+                                            DetailsForm2(emailText: email.text),
                                       ),
                                     );
                                   }
@@ -324,14 +321,12 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                               },
                               child: const Text(
                                 "Register",
-                                style: TextStyle(color: Colors.white, fontSize: 20),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
                               )),
                         ),
                         const SizedBox(
-                          height: 24,
-                        ),
-                        const SizedBox(
-                          height: 5,
+                          height: 29,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -346,33 +341,36 @@ class _SignUpScreenState extends State<SignUpScreen>  {
                             TextButton(
                                 onPressed: () {
                                   print("go to sign in");
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
-                                    ),
-                                  );
+                                  Future.delayed(
+                                      const Duration(milliseconds: 1500), () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
+                                      ),
+                                    );
+                                  });
                                 },
                                 child: const Text(
                                   "Sign In",
-                                  style:
-                                      TextStyle(color: Color.fromRGBO(162, 7, 48, 1)),
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
                                 ))
                           ],
                         )
                       ],
                     ),
                   ),
-                )
+                )),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
-    toggleButton() {
-      setState((){
-        toggleValue=!toggleValue;
-      });
-    }
+  toggleButton() {
+    setState(() {
+      toggleValue = !toggleValue;
+    });
+  }
 }

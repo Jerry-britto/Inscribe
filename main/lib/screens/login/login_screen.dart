@@ -43,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        displayMessage('No user found for that email.');
+        displayMessage('User not found.');
       } else if (e.code == 'wrong-password') {
-        displayMessage('Wrong password provided for that user.');
+        displayMessage('The password entered is wrong.');
       } else {
         displayMessage(e.message.toString());
       }
@@ -200,7 +200,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 24,
                     ),
-                  
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -210,8 +209,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => const SignUpScreen()));
+                              Future.delayed(const Duration(milliseconds: 1500),
+                                  () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => const SignUpScreen()));
+                              });
                             },
                             child: const Text(
                               "Sign up",
@@ -224,18 +226,5 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             )),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
-          tooltip: 'Admin',
-          shape: const CircleBorder(
-              side: BorderSide(
-                  color: Color.fromRGBO(227, 161, 43, 0.3), width: 2),
-              eccentricity: 1.0),
-          child: const Icon(
-            Icons.admin_panel_settings_outlined,
-            color: Colors.white,
-          ),
-        ),
       );
 }
