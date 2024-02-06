@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 .where("email", isEqualTo: email)
                 .get();
 
-                        // To Check if the user exists in the Scribes collection
+        // To Check if the user exists in the Scribes collection
 
         final QuerySnapshot<Map<String, dynamic>> isSwd =
             await FirebaseFirestore.instance
@@ -62,10 +62,20 @@ class _LoginScreenState extends State<LoginScreen> {
           print('User is a Scribe.');
 
           // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(builder: (_) =>  ScribeHome(emailText: email,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => ScribeHome(
+                        emailText: email,
+                      )));
         } else if (isSwd.docs.isNotEmpty) {
-               // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(builder: (_) =>  SwdHome(emailText: email,)));
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => SwdHome(
+                        emailText: email,
+                      )));
         } else {
           displayMessage('User does not exist');
         }
@@ -108,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
                                 height: 100,

@@ -86,7 +86,8 @@ class _DetailsFormState extends State<DetailsForm> {
 
     colref.doc(_email.text).set(swdMap).then((value) {
       print("Details Added");
-      Navigator.push(context, MaterialPageRoute(builder: (_)=> SwdHome(emailText: emailText)));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => SwdHome(emailText: emailText)));
     }).catchError((error) {
       print("Failed to add details : $error");
     });
