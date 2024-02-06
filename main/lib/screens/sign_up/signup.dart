@@ -242,10 +242,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: password,
                           validator: (val) {
-                            if (val == null || val.isEmpty) {
+                            if (val == null ||
+                                val.isEmpty ||
+                                val.trim() == "") {
                               return "Kindly enter your Password";
+                            } else if (val.length < 6) {
+                              return "Length of password should be more than 6";
+                            } else {
+                              return null;
                             }
-                            return null;
                           },
                           decoration: InputDecoration(
                               filled: true,

@@ -101,7 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextFormField(
                             controller: email,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  value.trim() == "") {
                                 return "Kindly enter your email";
                               } else if (!RegExp(
                                       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
@@ -130,10 +132,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextFormField(
                             controller: password,
                             validator: (val) {
-                              if (val == null || val.isEmpty) {
+                              if (val == null ||
+                                  val.isEmpty ||
+                                  val.trim() == "") {
                                 return "Kindly enter your Password";
+                              } else if (val.length < 6) {
+                                return "Length of password should be more than 6";
                               }
+                              else{
                               return null;
+                              }
                             },
                             decoration: InputDecoration(
                                 filled: true,
