@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:main/screens/home/scribe_home.dart';
+import 'package:main/screens/home/swd_home.dart';
 import 'package:main/screens/login/forgot_password.dart';
 import 'package:main/screens/sign_up/signup.dart';
 
@@ -33,13 +36,39 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  loginUser(String email, String password) async {
+  Future<void> loginUser(String email, String password) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
         print("User logged in");
-        // navigate to home
+
+        // To Check if the user exists in the Scribes collection
+        final QuerySnapshot<Map<String, dynamic>> isScribe =
+            await FirebaseFirestore.instance
+                .collection("Scribes")
+                .where("email", isEqualTo: email)
+                .get();
+
+                        // To Check if the user exists in the Scribes collection
+
+        final QuerySnapshot<Map<String, dynamic>> isSwd =
+            await FirebaseFirestore.instance
+                .collection("SWD")
+                .where("email", isEqualTo: email)
+                .get();
+
+        if (isScribe.docs.isNotEmpty) {
+          print('User is a Scribe.');
+
+          // ignore: use_build_context_synchronously
+          Navigator.push(context, MaterialPageRoute(builder: (_) =>  ScribeHome(emailText: email,)));
+        } else if (isSwd.docs.isNotEmpty) {
+               // ignore: use_build_context_synchronously
+          Navigator.push(context, MaterialPageRoute(builder: (_) =>  SwdHome(emailText: email,)));
+        } else {
+          displayMessage('User does not exist');
+        }
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -138,9 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return "Kindly enter your Password";
                               } else if (val.length < 6) {
                                 return "Length of password should be more than 6";
-                              }
-                              else{
-                              return null;
+                              } else {
+                                return null;
                               }
                             },
                             decoration: InputDecoration(
