@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:main/screens/home/scribe_home.dart';
 
 class DetailsForm2 extends StatefulWidget {
   const DetailsForm2({super.key, required this.emailText});
@@ -74,11 +75,13 @@ class _DetailsFormState2 extends State<DetailsForm2> {
       "phoneNo": _contact,
     };
 
-    colref
-        .doc(_email.text)
-        .set(scribesMap)
-        .then((value) => print("Details Added"))
-        .catchError((error) => print("Failed to add details : $error"));
+    colref.doc(_email.text).set(scribesMap).then((value) {
+      print("Details Added");
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => ScribeHome(emailText: emailText)));
+    }).onError((error, stackTrace) {
+      print("Cannot Go from from details to home due to ${error.toString()}");
+    });
   }
 
   @override
