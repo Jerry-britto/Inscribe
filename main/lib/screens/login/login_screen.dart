@@ -62,15 +62,16 @@ class _LoginScreenState extends State<LoginScreen> {
           print('User is a Scribe.');
 
           // ignore: use_build_context_synchronously
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (_) => ScribeHome(
                         emailText: email,
-                      )));
+                      ))
+                      );
         } else if (isSwd.docs.isNotEmpty) {
           // ignore: use_build_context_synchronously
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (_) => SwdHome(

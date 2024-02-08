@@ -86,9 +86,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
           appBar: AppBar(
             leading: BackButton(
               color: Colors.white,
@@ -511,8 +509,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                     ),
                   )
                 ]),
-          )),
-    );
+          ));
   }
 
   @override
