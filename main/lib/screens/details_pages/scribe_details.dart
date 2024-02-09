@@ -321,7 +321,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           fontSize: 20),
                                     ),
-                                    const SizedBox(width: 190),
+                                    const SizedBox(width: 200),
                                     DropdownButton<String>(
                                       dropdownColor: Colors.white,
                                       style: const TextStyle(
@@ -363,7 +363,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           fontSize: 20),
                                     ),
-                                    const SizedBox(width: 170),
+                                    const SizedBox(width: 150),
                                     DropdownButton<String>(
                                       dropdownColor: Colors.white,
                                       style: const TextStyle(
