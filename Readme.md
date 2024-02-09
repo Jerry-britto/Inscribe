@@ -7,8 +7,7 @@ Isha Tanna
 
 ## Developers
 1. Johanna Rodrigues
-2. Sahil Shaikh
-3. Jerry Britto
+2. Jerry Britto
 
 ### Quality assurance and testing 
 Sahil Shaikh
