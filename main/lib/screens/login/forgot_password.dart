@@ -9,6 +9,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   displayMessage(String message) => showDialog(
       context: context,
@@ -37,40 +38,76 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forgot Password"),
+        title: const Text(
+          "Forgot Password",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Kindly enter your email";
-                } else if (!RegExp(
-                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-                    .hasMatch(value)) {
-                  return "Invalid Email";
-                } else {
-                  return null;
-                }
-              },
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: "Enter email",
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(227, 161, 43, 0.3),
+          ),
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Kindly enter your email";
+                      } else if (!RegExp(
+                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+                          .hasMatch(value)) {
+                        return "Invalid Email";
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: emailController,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 2),
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                        hintText: "Enter Email",
+                        prefixIcon: const Icon(Icons.mail)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FloatingActionButton.extended(
+                    backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+                    onPressed: ()  {
+                      if(_formKey.currentState!.validate()){
+                       passwordReset(
+                          emailController.text.toLowerCase().trim());
+                      }
+                    },
+                    label: const Text(
+                      "Reset your password",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            FloatingActionButton.extended(
-              onPressed: () async {
-                await passwordReset(emailController.text.toLowerCase().trim());
-              },
-              label: const Text("Reset your password"),
-            )
-          ],
+          ),
         ),
       ),
     );
