@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:main/screens/home/scribe_home.dart';
+import 'package:main/screens/home/scribe/scribe_home.dart';
 
 class DetailsForm2 extends StatefulWidget {
   const DetailsForm2({super.key, required this.emailText});

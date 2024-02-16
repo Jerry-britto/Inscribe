@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:main/screens/home/scribe_home.dart';
-import 'package:main/screens/home/swd_home.dart';
+import 'package:main/screens/home/scribe/scribe_home.dart';
+import 'package:main/screens/home/swd/swd_home.dart';
 import 'package:main/screens/login/forgot_password.dart';
 import 'package:main/screens/sign_up/signup.dart';
 
