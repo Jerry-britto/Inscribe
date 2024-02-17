@@ -74,19 +74,19 @@ class _DetailsFormState extends State<DetailsForm> {
     CollectionReference colref = FirebaseFirestore.instance.collection('SWD');
 
     Map<String, dynamic> swdMap = {
-      "email": _email.text,
-      "name": _name.text,
+      "email": _email.text.toLowerCase(),
+      "name": _name.text.toLowerCase(),
       "age": _age,
       "uid": _uid,
-      "year": _yearValue,
-      "course": _courseValue,
-      "disability": _disabilityValue,
-      "phoneNo": _contact,
+      "year": _yearValue.toLowerCase(),
+      "course": _courseValue.toLowerCase(),
+      "disability": _disabilityValue.toLowerCase(),
+      "phoneNo": _contact.toLowerCase(),
     };
 
     colref.doc(_email.text).set(swdMap).then((value) {
       print("Details Added");
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (_) => SwdHome(emailText: emailText)));
     }).catchError((error) {
       print("Failed to add details : $error");

@@ -71,13 +71,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         // Navigate user to details page
         print("User signed up");
         if (toggleValue == false) {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => DetailsForm(emailText: email),
             ),
           );
         } else if (toggleValue == true) {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => DetailsForm2(emailText: email),
             ),

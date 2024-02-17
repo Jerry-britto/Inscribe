@@ -66,18 +66,18 @@ class _DetailsFormState2 extends State<DetailsForm2> {
         FirebaseFirestore.instance.collection('Scribes');
 
     Map<String, dynamic> scribesMap = {
-      "email": _email.text,
-      "name": _name.text,
+      "email": _email.text.toLowerCase(),
+      "name": _name.text.toLowerCase(),
       "age": _age,
       "uid": _uid,
-      "year": _yearValue,
-      "course": _courseValue,
-      "phoneNo": _contact,
+      "year": _yearValue.toLowerCase(),
+      "course": _courseValue.toLowerCase(),
+      "phoneNo": _contact.toLowerCase(),
     };
 
     colref.doc(_email.text).set(scribesMap).then((value) {
       print("Details Added");
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (_) => ScribeHome(emailText: emailText)));
     }).onError((error, stackTrace) {
       print("Cannot Go from from details to home due to ${error.toString()}");
