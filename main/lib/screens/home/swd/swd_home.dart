@@ -21,7 +21,7 @@ class _SwdHomeState extends State<SwdHome> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+          backgroundColor: Colors.orange.shade600,
           title: Text(
             text,
             style: TextStyle(
@@ -56,10 +56,10 @@ class _SwdHomeState extends State<SwdHome> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: positon,
-          selectedItemColor: Colors.blue[400],
+          selectedItemColor: Colors.blue[800],
           unselectedItemColor: Colors.white,
           iconSize: 30,
-          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+          backgroundColor: Colors.orange.shade600,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
             BottomNavigationBarItem(
@@ -86,7 +86,7 @@ class _SwdHomeState extends State<SwdHome> {
         ),
         body: Container(
              decoration: const BoxDecoration(
-                color: Color.fromRGBO(227, 161, 43, 0.3),
+                // color: Color.fromRGBO(227, 161, 43, 0.3),
               ),
         ),
     );
