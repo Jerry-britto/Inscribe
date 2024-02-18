@@ -70,7 +70,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
       "name": _name.text,
       "age": _age,
       "uid": _uid,
-      "year": _yearValue.toLowerCase(),
+      "year": _yearValue,
       "course": _courseValue.toLowerCase(),
       "phoneNo": _contact.toLowerCase(),
     };
