@@ -67,8 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               MaterialPageRoute(
                   builder: (_) => ScribeHome(
                         emailText: email,
-                      ))
-                      );
+                      )));
         } else if (isSwd.docs.isNotEmpty) {
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
@@ -81,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
           displayMessage('User does not exist');
         }
       });
+      // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         displayMessage('User not found.');
@@ -93,10 +93,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Welcome back",
+            "Welcome back", 
             style: TextStyle(
               color: Colors.white,
             ),
@@ -272,7 +279,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 TextButton(
                                     onPressed: () {
                                       Future.delayed(
-                                          const Duration(milliseconds: 600), () {
+                                          const Duration(milliseconds: 600),
+                                          () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (_) =>

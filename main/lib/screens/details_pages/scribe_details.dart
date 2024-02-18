@@ -67,7 +67,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
 
     Map<String, dynamic> scribesMap = {
       "email": _email.text.toLowerCase(),
-      "name": _name.text.toLowerCase(),
+      "name": _name.text,
       "age": _age,
       "uid": _uid,
       "year": _yearValue.toLowerCase(),

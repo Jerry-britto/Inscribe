@@ -75,13 +75,13 @@ class _DetailsFormState extends State<DetailsForm> {
 
     Map<String, dynamic> swdMap = {
       "email": _email.text.toLowerCase(),
-      "name": _name.text.toLowerCase(),
+      "name": _name.text,
       "age": _age,
       "uid": _uid,
-      "year": _yearValue.toLowerCase(),
+      "year": _yearValue,
       "course": _courseValue.toLowerCase(),
       "disability": _disabilityValue.toLowerCase(),
-      "phoneNo": _contact.toLowerCase(),
+      "phoneNo": _contact,
     };
 
     colref.doc(_email.text).set(swdMap).then((value) {
