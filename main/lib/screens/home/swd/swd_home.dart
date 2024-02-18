@@ -13,11 +13,6 @@ class SwdHome extends StatefulWidget {
 }
 
 class _SwdHomeState extends State<SwdHome> {
-  // final TextStyle customTextStyle = const TextStyle(
-  //   color: Colors.black,
-  //   fontWeight: FontWeight.normal,
-  //   decoration: TextDecoration.none,
-  // );
 
   Widget displayScreen(int idx) {
     switch (idx) {
@@ -37,8 +32,10 @@ class _SwdHomeState extends State<SwdHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(255, 218, 185, 1.0),
       appBar: AppBar(
-        backgroundColor: Colors.orange.shade600,
+        // backgroundColor: Colors.orange.shade600,
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
         title: Text(
           text,
           style: TextStyle(
@@ -76,7 +73,8 @@ class _SwdHomeState extends State<SwdHome> {
         selectedItemColor: Colors.blue[800],
         unselectedItemColor: Colors.white,
         iconSize: 30,
-        backgroundColor: Colors.orange.shade600,
+        // backgroundColor: Colors.orange.shade600,
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(

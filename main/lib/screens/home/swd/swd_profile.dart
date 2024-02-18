@@ -42,12 +42,8 @@ class _SwdProfileState extends State<SwdProfile> {
     return data != null
         ? Padding(
             padding: const EdgeInsets.all(20),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                    color: Colors.blue, width: 3, style: BorderStyle.solid),
-              ),
+            child: Card(
+              color: Colors.white,
               child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
