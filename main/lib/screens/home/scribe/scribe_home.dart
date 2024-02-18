@@ -35,8 +35,9 @@ class _ScribeHomeState extends State<ScribeHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(255, 218, 185, 1.0),
       appBar: AppBar(
-        backgroundColor: Colors.orange.shade600,
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
         title: Text(
           text,
           style: TextStyle(
@@ -74,7 +75,7 @@ class _ScribeHomeState extends State<ScribeHome> {
         selectedItemColor: Colors.blue[800],
         unselectedItemColor: Colors.white,
         iconSize: 30,
-        backgroundColor: Colors.orange.shade600,
+        backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(icon: Icon(Icons.email), label: "View Requests"),

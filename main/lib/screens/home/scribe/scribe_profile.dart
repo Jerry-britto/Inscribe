@@ -42,12 +42,8 @@ class _ScribeProfileState extends State<ScribeProfile> {
     return data != null
         ? Padding(
             padding: const EdgeInsets.all(20),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                    color: Colors.blue, width: 3, style: BorderStyle.solid),
-              ),
+            child: Card(
+              color: Colors.white,
               child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -187,9 +183,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                               print(data);
                               // print();
                             },
-                            icon: const Icon(
-                              CupertinoIcons.pencil,
-                            ),
+                            icon: Image.asset("assets/icons/pencil.png",color: Colors.white,)
                           ),
                         ),
                         const SizedBox(

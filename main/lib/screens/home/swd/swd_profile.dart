@@ -191,17 +191,17 @@ class _SwdProfileState extends State<SwdProfile> {
                         CircleAvatar(
                           backgroundColor: Colors.orange,
                           child: IconButton(
-                            iconSize: 32,
-                            color: Colors.white,
-                            onPressed: () {
-                              print("edit details");
-                              print(data);
-                              // print();
-                            },
-                            icon: const Icon(
-                              CupertinoIcons.pencil,
-                            ),
-                          ),
+                              iconSize: 32,
+                              color: Colors.white,
+                              onPressed: () {
+                                print("edit details");
+                                print(data);
+                                // print();
+                              },
+                              icon: Image.asset(
+                                "assets/icons/pencil.png",
+                                color: Colors.white,
+                              )),
                         ),
                         const SizedBox(
                           width: 20,
@@ -213,12 +213,12 @@ class _SwdProfileState extends State<SwdProfile> {
               ),
             ),
           )
-        :  SizedBox(
-          height: MediaQuery.of(context).size.height/2,
-          width: MediaQuery.of(context).size.height/2,
-          child:  const Center(
-            child:  CircularProgressIndicator(),
-          ),
-        );
+        : SizedBox(
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.height / 2,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
   }
 }

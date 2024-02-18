@@ -65,7 +65,7 @@ flutter:
   assets:
   - assets/images/xaviers_logo.png
   - assets/images/XRCVC.png
-  - assets/images/google_icon.webp
+  - assets/icons/pencil.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
