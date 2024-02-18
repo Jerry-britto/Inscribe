@@ -211,8 +211,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           isVisible = !isVisible;
                                         });
                                       },
-                                      icon: const Icon(
-                                          Icons.remove_red_eye_sharp))),
+                                      icon:  Icon(
+                                         isVisible?Icons.visibility:Icons.visibility_off))),
                               obscureText: isVisible,
                             ),
                             const SizedBox(
