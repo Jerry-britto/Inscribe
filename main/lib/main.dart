@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:main/firebase_options.dart';
+import 'package:main/screens/details_pages/scribe_details.dart';
 import 'package:main/screens/login/login_screen.dart';
 import 'package:intl/intl_standalone.dart' if (dart.library.html) 'package:intl/intl_browser.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       home: const Scaffold(
         body: Center(
-          child: LoginScreen(),
+          child: DetailsForm2(emailText:"hii"),
         ),
       ),
     );

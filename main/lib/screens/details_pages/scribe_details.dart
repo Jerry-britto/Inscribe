@@ -34,11 +34,8 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'Masters',
   ];
 
-  var courseItems = [
+  var courseItems1 = [
     'Select',
-    'Arts',
-    'Science',
-    'Commerce',
     'BSc',
     'BA',
     'BCom',
@@ -46,7 +43,12 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'BMS',
     'BA MCJ',
     'BAF',
-    'Other(Masters)',
+  ];
+  var courseItems2 = [
+    'Select',
+    'Arts',
+    'Science',
+    'Commerce',
   ];
 
   var _validationMessage = "";
@@ -131,33 +133,39 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                       "assets/images/xaviers_logo.png",
                                     ),
                                   ),
-                                  const Column(
-                                    children: <Widget>[
-                                      Center(
-                                        child: Text("Welcome Dear Scribe!",
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                color: Color.fromRGBO(
-                                                    162, 7, 48, 1),
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      Center(
-                                        child: Text("Your Contribution",
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                color: Color.fromRGBO(
-                                                    162, 7, 48, 1),
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      Center(
-                                        child: Text("is Greatly Valued!",
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                color: Color.fromRGBO(
-                                                    162, 7, 48, 1),
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                    ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                    ),
+                                    child: const Column(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Text("Welcome Dear Scribe!",
+                                              style: TextStyle(
+                                                  fontSize: 22,
+                                                  color: Color.fromRGBO(
+                                                      162, 7, 48, 1),
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Center(
+                                          child: Text("Your Contribution",
+                                              style: TextStyle(
+                                                  fontSize: 22,
+                                                  color: Color.fromRGBO(
+                                                      162, 7, 48, 1),
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Center(
+                                          child: Text("is Greatly Valued!",
+                                              style: TextStyle(
+                                                  fontSize: 22,
+                                                  color: Color.fromRGBO(
+                                                      162, 7, 48, 1),
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -321,22 +329,25 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           fontSize: 20),
                                     ),
-                                    const SizedBox(width: 200),
-                                    DropdownButton<String>(
-                                      dropdownColor: Colors.white,
-                                      style: const TextStyle(
-                                          color: Color.fromRGBO(162, 7, 48, 1)),
-                                      value: _yearValue,
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      items: yearItems.map((String yearItem) {
-                                        return DropdownMenuItem(
-                                          value: yearItem,
-                                          child: Text(yearItem),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? value) => setState(
-                                          () => _yearValue = value.toString()),
+                                    
+                                    Padding(
+                                      padding: EdgeInsets.only(left:150),
+                                      child: DropdownButton<String>(
+                                        dropdownColor: Colors.white,
+                                        style: const TextStyle(
+                                            color: Color.fromRGBO(162, 7, 48, 1)),
+                                        value: _yearValue,
+                                        icon:
+                                            const Icon(Icons.keyboard_arrow_down),
+                                        items: yearItems.map((String yearItem) {
+                                          return DropdownMenuItem(
+                                            value: yearItem,
+                                            child: Text(yearItem),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? value) => setState(
+                                            () => _yearValue = value.toString()),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -363,24 +374,34 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           fontSize: 20),
                                     ),
-                                    const SizedBox(width: 150),
-                                    DropdownButton<String>(
-                                      dropdownColor: Colors.white,
-                                      style: const TextStyle(
-                                          color: Color.fromRGBO(162, 7, 48, 1)),
-                                      value: _courseValue,
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      items: courseItems.map((String items) {
-                                        return DropdownMenuItem(
-                                          value: items,
-                                          child: Text(items),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? value) => setState(
-                                          () =>
-                                              _courseValue = value.toString()),
-                                      //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
+                                    
+                                    Padding(
+                                      padding: EdgeInsets.only(left:126),
+                                      child: DropdownButton<String>(
+                                        dropdownColor: Colors.white,
+                                        style: const TextStyle(
+                                            color: Color.fromRGBO(162, 7, 48, 1)),
+                                        value: _courseValue,
+                                        icon:
+                                            const Icon(Icons.keyboard_arrow_down),
+                                        items: _yearValue=="FYJC" || _yearValue=="SYJC"?
+                                        courseItems2.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList():
+                                        courseItems1.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? value) => setState(
+                                            () =>
+                                                _courseValue = value.toString()),
+                                        //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
+                                      ),
                                     ),
                                   ],
                                 ),
