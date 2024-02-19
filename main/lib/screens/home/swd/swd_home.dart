@@ -89,7 +89,7 @@ class _SwdHomeState extends State<SwdHome> {
                 text = "Profile";
                 break;
               case 1:
-                text = "Find a Scribe";
+                text = "Examination Details";
                 break;
               case 2:
                 text = "My Requests";
