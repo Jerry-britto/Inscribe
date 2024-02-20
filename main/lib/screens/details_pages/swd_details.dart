@@ -434,25 +434,13 @@ class _DetailsFormState extends State<DetailsForm> {
                             color: Color.fromRGBO(162, 7, 48, 1),
                             fontSize: 12)),
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     Container(
                       padding: const EdgeInsets.all(9),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                            color: const Color.fromRGBO(77, 77, 77, 1)),
-                        color: Colors.white,
-                      ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Upload your profile",
-                            style: TextStyle(
-                                color: Color.fromRGBO(162, 7, 48, 1),
-                                fontSize: 20),
-                          ),
                           FloatingActionButton.extended(
                             backgroundColor:
                                 const Color.fromRGBO(162, 7, 48, 1),
