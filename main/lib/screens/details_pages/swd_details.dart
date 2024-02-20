@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:main/screens/home/swd/swd_home.dart';
 
 class DetailsForm extends StatefulWidget {
@@ -18,6 +22,7 @@ class _DetailsFormState extends State<DetailsForm> {
   final _email = TextEditingController();
   final _disability = TextEditingController();
   var _age = 0;
+  String imageUrl = "";
   var _uid = 0;
   var _contact = '';
   String _yearValue = 'Select';
@@ -77,6 +82,7 @@ class _DetailsFormState extends State<DetailsForm> {
       "course": _courseValue.toLowerCase(),
       "disability": _disability.text,
       "phoneNo": _contact,
+      "imageUrl":imageUrl
     };
 
     colref.doc(_email.text).set(swdMap).then((value) {
@@ -445,7 +451,177 @@ class _DetailsFormState extends State<DetailsForm> {
                         const SizedBox(
                           height: 30,
                         ),
+                          Container(
+                      padding: const EdgeInsets.all(9),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                            color: const Color.fromRGBO(77, 77, 77, 1)),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            "Upload your profile",
+                            style: TextStyle(
+                                color: Color.fromRGBO(162, 7, 48, 1),
+                                fontSize: 20),
+                          ),
+                          FloatingActionButton.extended(
+                            backgroundColor:
+                                const Color.fromRGBO(162, 7, 48, 1),
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: 200,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        FloatingActionButton.extended(
+                                          onPressed: () async {
+                                            print("tapped on camera button");
+                                             
+                                            ImagePicker imgPicker =
+                                                ImagePicker();
+                                            XFile? file =
+                                                await imgPicker.pickImage(
+                                                    source: ImageSource.camera);
+                                            if (file == null) {
+                                              print("No file found ");
+                                              // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
+                                              return;
+                                            }
+                                            print("Image path: ${file.path}");
+                                            //step 1 completed
 
+                                            //step 2
+                                            // create a unique id
+                                            String uniqueFileName =
+                                                DateTime.now()
+                                                    .millisecondsSinceEpoch
+                                                    .toString();
+
+                                            // Get a reference to storage root
+                                            Reference refRoot =
+                                                FirebaseStorage.instance.ref();
+
+                                            // If needed mention the exact folder where it has to stored
+                                            Reference refDirImages =
+                                                refRoot.child("profiles");
+
+                                            //Create a reference to that image which needs to be stored
+                                            // Reference refImageToBeUploaded = refDirImages.child("${file?.name}");
+                                            Reference refImageToBeUploaded =
+                                                refDirImages
+                                                    .child(uniqueFileName);
+
+                                         
+                                            //store the file to that reference
+                                            try {
+                                              await refImageToBeUploaded
+                                                  .putFile(File(file.path));
+
+                                              //get the download url (step 3)
+
+                                              imageUrl =
+                                                  await refImageToBeUploaded
+                                                      .getDownloadURL();
+                                              print("Image url: $imageUrl");
+                                            } on FirebaseException catch (err) {
+                                              print(err.message.toString());
+                                            } catch (e) {
+                                              print(
+                                                  "File was not uploaded due to ${e.toString()}");
+                                            } finally {
+                                              // Hide the loading indicator
+                                            }
+                                          },
+                                          label: const Text("Camera"),
+                                          icon: Icon(Icons.camera_alt),
+                                        ),
+
+                                        FloatingActionButton.extended(
+                                          onPressed: () async{
+                                           
+                                            print("Gallery ");
+                                             ImagePicker imgPicker =
+                                                ImagePicker();
+                                            XFile? file =
+                                                await imgPicker.pickImage(
+                                                    source: ImageSource.gallery);
+                                            if (file == null) {
+                                              print("No file found ");
+                                              // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
+                                              return;
+                                            }
+                                            print("Image path: ${file.path}");
+                                            //step 1 completed
+
+                                            //step 2
+                                            // create a unique id
+                                            String uniqueFileName =
+                                                DateTime.now()
+                                                    .millisecondsSinceEpoch
+                                                    .toString();
+
+                                            // Get a reference to storage root
+                                            Reference refRoot =
+                                                FirebaseStorage.instance.ref();
+
+                                            // If needed mention the exact folder where it has to stored
+                                            Reference refDirImages =
+                                                refRoot.child("profiles");
+
+                                            //Create a reference to that image which needs to be stored
+                                            // Reference refImageToBeUploaded = refDirImages.child("${file?.name}");
+                                            Reference refImageToBeUploaded =
+                                                refDirImages
+                                                    .child(uniqueFileName);
+
+                                         
+                                            //store the file to that reference
+                                            try {
+                                              await refImageToBeUploaded
+                                                  .putFile(File(file.path));
+
+                                              //get the download url (step 3)
+
+                                              imageUrl =
+                                                  await refImageToBeUploaded
+                                                      .getDownloadURL();
+                                              print("Image url: $imageUrl");
+                                            } on FirebaseException catch (err) {
+                                              print(err.message.toString());
+                                            } catch (e) {
+                                              print(
+                                                  "File was not uploaded due to ${e.toString()}");
+                                            } 
+
+                                          },
+                                          label: const Text("Gallery"),
+                                          icon: const Icon(Icons.photo),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            label: const Text(
+                              "Add profile pic",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                       const SizedBox(height: 20,),
                         const Text(
                           "Contact Details:",
                           style: TextStyle(

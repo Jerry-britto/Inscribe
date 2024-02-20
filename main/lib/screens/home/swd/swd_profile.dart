@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:main/screens/details_pages/swd_details.dart';
 
 class SwdProfile extends StatefulWidget {
   final String? emailText;
@@ -63,6 +64,7 @@ class _SwdProfileState extends State<SwdProfile> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
+                              data!["image"]!=""?data!["imageUrl"]:
                               "https://images.pexels.com/photos/17604370/pexels-photo-17604370/free-photo-of-beautiful-woman-sitting-under-a-tree.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
                               height: 150,
                               width: 150,
@@ -195,6 +197,9 @@ class _SwdProfileState extends State<SwdProfile> {
                               onPressed: () {
                                 print("edit details");
                                 print(data);
+                                Future.delayed(const Duration(milliseconds: 1000),(){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailsForm(emailText: widget.emailText.toString())));
+                                });
                                 // print();
                               },
                               icon: Image.asset(

@@ -72,7 +72,7 @@ class _ScribeHomeState extends State<ScribeHome> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: positon,
-        selectedItemColor: Colors.blue[800],
+        selectedItemColor: Colors.blue.shade300,
         unselectedItemColor: Colors.white,
         iconSize: 30,
         backgroundColor: const Color.fromRGBO(162, 7, 48, 1),

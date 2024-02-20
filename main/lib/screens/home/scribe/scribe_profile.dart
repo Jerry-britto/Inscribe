@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:main/screens/details_pages/scribe_details.dart';
 
 class ScribeProfile extends StatefulWidget {
   final String? emailText;
@@ -64,6 +64,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
+                            data!["imageUrl"]!=""?data!["imageUrl"]:
                               "https://images.pexels.com/photos/17604370/pexels-photo-17604370/free-photo-of-beautiful-woman-sitting-under-a-tree.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
                               height: 150,
                               width: 150,
@@ -174,7 +175,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.orange,
+                          backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
                           child: IconButton(
                             iconSize: 32,
                             color: Colors.white,
@@ -182,6 +183,9 @@ class _ScribeProfileState extends State<ScribeProfile> {
                               print("edit details");
                               print(data);
                               // print();
+                              Future.delayed(const Duration(milliseconds: 1000),(){
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsForm2(emailText: widget.emailText.toString())));
+                              });
                             },
                             icon: Image.asset("assets/icons/pencil.png",color: Colors.white,)
                           ),
