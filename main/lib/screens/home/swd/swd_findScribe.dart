@@ -144,44 +144,44 @@ class _FindScribeState extends State<FindScribe> {
                             },
                           ),
                           const SizedBox(height:20),
-                          DateTimeFormField(
+                          // DateTimeFormField(
                                       
-                            validator: (value) {
-                              if (selectedDate == null) {
-                                return 'Please Select Date and Time of the Exam';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Date and Time',
-                              hintText: "Enter Date and Time",
-                              labelStyle: TextStyle(
-                                  fontSize: 20,
-                                  color: Color.fromRGBO(162, 7, 48, 1)),
-                              hintStyle: TextStyle(fontSize: 15),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                borderSide: BorderSide(
-                                    color: Color.fromRGBO(71, 71, 71, 1)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                borderSide: BorderSide(
-                                    width: 1.5,
-                                    color: Color.fromRGBO(162, 7, 48, 1)),
-                              ),
-                            ),
-                            firstDate: DateTime.now().add(const Duration(days: 0)),
-                            lastDate: DateTime.now().add(const Duration(days: 365)),
-                            initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),
-                            onChanged: (DateTime? value) {
-                              selectedDate = value;
-                            },
-                          ),
+                          //   validator: (value) {
+                          //     if (selectedDate == null) {
+                          //       return 'Please Select Date and Time of the Exam';
+                          //     }
+                          //     return null;
+                          //   },
+                          //   decoration: const InputDecoration(
+                          //     labelText: 'Date and Time',
+                          //     hintText: "Enter Date and Time",
+                          //     labelStyle: TextStyle(
+                          //         fontSize: 20,
+                          //         color: Color.fromRGBO(162, 7, 48, 1)),
+                          //     hintStyle: TextStyle(fontSize: 15),
+                          //     filled: true,
+                          //     fillColor: Colors.white,
+                          //     border: OutlineInputBorder(
+                          //       borderRadius:
+                          //           BorderRadius.all(Radius.circular(50)),
+                          //       borderSide: BorderSide(
+                          //           color: Color.fromRGBO(71, 71, 71, 1)),
+                          //     ),
+                          //     focusedBorder: OutlineInputBorder(
+                          //       borderRadius:
+                          //           BorderRadius.all(Radius.circular(50)),
+                          //       borderSide: BorderSide(
+                          //           width: 1.5,
+                          //           color: Color.fromRGBO(162, 7, 48, 1)),
+                          //     ),
+                          //   ),
+                          //   firstDate: DateTime.now().add(const Duration(days: 0)),
+                          //   lastDate: DateTime.now().add(const Duration(days: 365)),
+                          //   initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),
+                          //   onChanged: (DateTime? value) {
+                          //     selectedDate = value;
+                          //   },
+                          // ),
                           const SizedBox(height:20),
                           TextFormField(
                           controller: _duration,

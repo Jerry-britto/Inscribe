@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       home: const Scaffold(
         body: Center(
-          child: DetailsForm2(emailText:"hii"),
+          child: LoginScreen(),
         ),
       ),
     );
