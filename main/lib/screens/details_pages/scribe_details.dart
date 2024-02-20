@@ -27,7 +27,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
   String _yearValue = 'Select';
   String _courseValue = 'Select';
   String imageUrl = "";
-
+  bool uploadStatus = false;
   // List of items in our dropdown menus
   var yearItems = [
     'Select',
@@ -422,8 +422,11 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                               children: [
                                                 FloatingActionButton.extended(
                                                   onPressed: () async {
-                                                    print(
-                                                        "tapped on camera button");
+                                                    setState(() {
+                                                      uploadStatus = true;
+                                                      print(
+                                                          "tapped on camera button");
+                                                    });
 
                                                     ImagePicker imgPicker =
                                                         ImagePicker();
@@ -485,13 +488,20 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                           "File was not uploaded due to ${e.toString()}");
                                                     } finally {
                                                       // Hide the loading indicator
+                                                      setState(() {
+                                                        uploadStatus = false;
+                                                      });
                                                     }
                                                   },
                                                   label: const Text("Camera"),
-                                                  icon: Icon(Icons.camera_alt),
+                                                  icon: const Icon(
+                                                      Icons.camera_alt),
                                                 ),
                                                 FloatingActionButton.extended(
                                                   onPressed: () async {
+                                                    setState(() {
+                                                      uploadStatus = true;
+                                                    });
                                                     print("Gallery ");
                                                     ImagePicker imgPicker =
                                                         ImagePicker();
@@ -551,7 +561,11 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                     } catch (e) {
                                                       print(
                                                           "File was not uploaded due to ${e.toString()}");
-                                                    } finally {}
+                                                    } finally {
+                                                      setState(() {
+                                                        uploadStatus = false;
+                                                      });
+                                                    }
                                                   },
                                                   label: const Text("Gallery"),
                                                   icon: const Icon(Icons.photo),
@@ -562,12 +576,14 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         },
                                       );
                                     },
-                                    label: const Text(
-                                      "Add profile pic",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    label: !uploadStatus
+                                        ? const Text(
+                                            "Add profile pic",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : const CircularProgressIndicator(),
                                   )
                                 ],
                               ),
@@ -677,6 +693,22 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         Colors.white),
                               ),
                               onPressed: () {
+                                if (uploadStatus) {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: const Text(
+                                        "Your profile photo is yet to be uploaded"),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
                                 dropDownValidate();
                                 if ((_formKey.currentState!.validate() ==
                                         true) &&
