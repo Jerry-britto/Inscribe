@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SwdProfile extends StatefulWidget {
@@ -68,7 +67,7 @@ class _SwdProfileState extends State<SwdProfile> {
                               height: 150,
                               width: 150,
                               fit: BoxFit.cover),
-                        )
+                        ),
                       ],
                     ),
                     Row(
@@ -189,7 +188,7 @@ class _SwdProfileState extends State<SwdProfile> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.orange,
+                          backgroundColor: Color.fromRGBO(162, 7, 48, 1),
                           child: IconButton(
                               iconSize: 32,
                               color: Colors.white,

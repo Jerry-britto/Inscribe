@@ -31,218 +31,241 @@ class _FindScribeState extends State<FindScribe> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(227, 161, 43, 0.3),
-        ),
-          child: Expanded(
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [Padding(
-                    padding: EdgeInsets.only(left:40, right:40),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(30),
-                            child: Text(
-                              "(Please Enter Correct Examination Details)",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Type of Examination :",
-                                  style: TextStyle(fontSize: 30),
-                                  textAlign: TextAlign.left,
+    return GestureDetector(
+      onTap: () {
+            FocusScope.of(context).unfocus();
+      },
+      child: Container(
+           
+            child: Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [Padding(
+                      padding: const EdgeInsets.only(left:40, right:40),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                           Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                ListTile(
-                                  title: const Text('CIA 1', style: TextStyle(color: Colors.black)),
-                                  leading: Radio(
-                                    activeColor: const Color.fromRGBO(162, 7, 48, 1),
-                                    value: 1,
-                                    groupValue: selectedOption,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedOption = value;
-                                      });
-                                    },
+                                child: const Padding(
+                                  padding: EdgeInsets.all(3),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Please Enter Correct Exam Details",
+                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                ListTile(
-                                  title: const Text('CIA 2', style: TextStyle(color: Colors.black)),
-                                  leading: Radio(
-                                    activeColor: const Color.fromRGBO(162, 7, 48, 1),
-                                    value: 2,
-                                    groupValue: selectedOption,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedOption = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                ListTile(
-                                  title: const Text('END SEMESTER', style: TextStyle(color: Colors.black)),
-                                  leading: Radio(
-                                    activeColor: const Color.fromRGBO(162, 7, 48, 1),
-                                    value: 3,
-                                    groupValue: selectedOption,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedOption = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          
-                                        
-                          const SizedBox(height: 30),
-                          const Text(
-                              "Enter Exam Details:",
-                              style: TextStyle(fontSize: 30),
-                              textAlign: TextAlign.left,
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Type of Exam:",
+                                    style: TextStyle(fontSize: 30),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  ListTile(
+                                    title: const Text('CIA 1', style: TextStyle(color: Colors.black)),
+                                    leading: Radio(
+                                      activeColor: const Color.fromRGBO(162, 7, 48, 1),
+                                      value: 1,
+                                      groupValue: selectedOption,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedOption = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: const Text('CIA 2', style: TextStyle(color: Colors.black)),
+                                    leading: Radio(
+                                      activeColor: const Color.fromRGBO(162, 7, 48, 1),
+                                      value: 2,
+                                      groupValue: selectedOption,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedOption = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: const Text('END SEMESTER', style: TextStyle(color: Colors.black)),
+                                    leading: Radio(
+                                      activeColor: const Color.fromRGBO(162, 7, 48, 1),
+                                      value: 3,
+                                      groupValue: selectedOption,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedOption = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            
+                                          
+                            const SizedBox(height: 30),
+                            const Text(
+                                "Enter Exam Details:",
+                                style: TextStyle(fontSize: 30),
+                                textAlign: TextAlign.left,
+                              ),
+                            const SizedBox(height:20),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                labelText: "Subject Name",
+                                hintText: "Enter Subject Name",
+                                labelStyle:  TextStyle(
+                                    fontSize: 20,
+                                    color: Color.fromRGBO(162, 7, 48, 1)),
+                                hintStyle: TextStyle(fontSize: 15),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(71, 71, 71, 1)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
+                                ),
+                              ),
+                              controller: _subName,
+                              validator: (value) {
+                                if (_subName.text=="") {
+                                  return 'Please Enter Subject Name';
+                                }
+                                return null;
+                              },
                             ),
-                          const SizedBox(height:20),
-                          TextFormField(
+                            const SizedBox(height:20),
+                            DateTimeFormField(
+                                 
+                              validator: (value) {
+                                if (selectedDate == null) {
+                                  return 'Please Select Date and Time of the Exam';
+                                }
+                                return null;
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'Date and Time',
+                                hintText: "Enter Date and Time",
+                                suffixIcon: Icon(
+                                  Icons.calendar_month,
+                                  color: Color.fromRGBO(162, 7, 48, 1),
+                                ),
+
+                                labelStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Color.fromRGBO(162, 7, 48, 1)),
+                                hintStyle: TextStyle(fontSize: 15),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(71, 71, 71, 1)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: Color.fromRGBO(162, 7, 48, 1)),
+                                ),
+                              ),
+                              firstDate: DateTime.now().add(const Duration(days: 0)),
+                              lastDate: DateTime.now().add(const Duration(days: 365)),
+                              //initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),
+                              onChanged: (DateTime? value) {
+                                selectedDate = value;
+                              },
+                            ),
+                            const SizedBox(height:20),
+                            TextFormField(
+                            controller: _duration,
+                            enabled: false,
+                            readOnly: true,
                             decoration: const InputDecoration(
-                              labelText: "Subject Name",
-                              hintText: "Enter Subject Name",
+                              labelText: "Duration (in minutes)",
                               labelStyle: TextStyle(
                                   fontSize: 20,
                                   color: Color.fromRGBO(162, 7, 48, 1)),
-                              hintStyle: TextStyle(fontSize: 15),
                               filled: true,
                               fillColor: Colors.white,
-                              border: OutlineInputBorder(
+                              disabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50)),
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(71, 71, 71, 1)),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                borderSide: BorderSide(
-                                    width: 1.5,
-                                    color: Color.fromRGBO(162, 7, 48, 1)),
-                              ),
-                            ),
-                            controller: _subName,
-                            validator: (value) {
-                              if (_subName.text=="") {
-                                return 'Please Enter Subject Name';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height:20),
-                          // DateTimeFormField(
-                                      
-                          //   validator: (value) {
-                          //     if (selectedDate == null) {
-                          //       return 'Please Select Date and Time of the Exam';
-                          //     }
-                          //     return null;
-                          //   },
-                          //   decoration: const InputDecoration(
-                          //     labelText: 'Date and Time',
-                          //     hintText: "Enter Date and Time",
-                          //     labelStyle: TextStyle(
-                          //         fontSize: 20,
-                          //         color: Color.fromRGBO(162, 7, 48, 1)),
-                          //     hintStyle: TextStyle(fontSize: 15),
-                          //     filled: true,
-                          //     fillColor: Colors.white,
-                          //     border: OutlineInputBorder(
-                          //       borderRadius:
-                          //           BorderRadius.all(Radius.circular(50)),
-                          //       borderSide: BorderSide(
-                          //           color: Color.fromRGBO(71, 71, 71, 1)),
-                          //     ),
-                          //     focusedBorder: OutlineInputBorder(
-                          //       borderRadius:
-                          //           BorderRadius.all(Radius.circular(50)),
-                          //       borderSide: BorderSide(
-                          //           width: 1.5,
-                          //           color: Color.fromRGBO(162, 7, 48, 1)),
-                          //     ),
-                          //   ),
-                          //   firstDate: DateTime.now().add(const Duration(days: 0)),
-                          //   lastDate: DateTime.now().add(const Duration(days: 365)),
-                          //   initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),
-                          //   onChanged: (DateTime? value) {
-                          //     selectedDate = value;
-                          //   },
-                          // ),
-                          const SizedBox(height:20),
-                          TextFormField(
-                          controller: _duration,
-                          enabled: false,
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            labelText: "Duration (in minutes)",
-                            labelStyle: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromRGBO(162, 7, 48, 1)),
-                            filled: true,
-                            fillColor: Colors.white,
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(71, 71, 71, 1)),
                             ),
                           ),
+                          const SizedBox(height:30),
+                          ],
                         ),
-                        const SizedBox(height:30),
-                        ],
                       ),
                     ),
-                  ),
-                          
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color.fromRGBO(162, 7, 48, 1)),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                            
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromRGBO(162, 7, 48, 1)),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                      ),
+                      onPressed: () {
+                        if ((_formKey.currentState!.validate() == true))
+                        {
+                          print(selectedDate);
+                          print(_subName.text);
+                          print("Button pressed");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('Request Sent Successfully!'),
+                              action: SnackBarAction(
+                                label: 'OK',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            )
+                          );
+                        }
+                      },
+                      child: const Text('SEND REQUEST'),
                     ),
-                    onPressed: () {
-                      if ((_formKey.currentState!.validate() == true))
-                      {
-                        print(selectedDate);
-                        print(_subName.text);
-                        print("Button pressed");
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text('Request Sent Successfully!'),
-                            action: SnackBarAction(
-                              label: 'OK',
-                              onPressed: () {
-                                // Some code to undo the change.
-                              },
-                            ),
-                          )
-                        );
-                      }
-                    },
-                    child: const Text('SEND REQUEST'),
-                  ),
-                  const SizedBox(height:20),
-                ],
-                            ),
+                    const SizedBox(height:20),
+                  ],
+                              ),
+                ),
               ),
             ),
           ),
-        );
+    );
       
   }
 }

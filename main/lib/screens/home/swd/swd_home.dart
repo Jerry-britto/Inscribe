@@ -70,7 +70,7 @@ class _SwdHomeState extends State<SwdHome> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: positon,
-        selectedItemColor: Colors.blue[800],
+        selectedItemColor: Colors.blue.shade300,
         unselectedItemColor: Colors.white,
         iconSize: 30,
         // backgroundColor: Colors.orange.shade600,
