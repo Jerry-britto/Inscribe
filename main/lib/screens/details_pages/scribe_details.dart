@@ -36,14 +36,10 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'FY',
     'SY',
     'TY',
-    'Masters',
   ];
 
-  var courseItems = [
+  var courseItems1 = [
     'Select',
-    'Arts',
-    'Science',
-    'Commerce',
     'BSc',
     'BA',
     'BCom',
@@ -51,7 +47,12 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'BMS',
     'BA MCJ',
     'BAF',
-    'Other(Masters)',
+  ];
+  var courseItems2 = [
+    'Select',
+    'Arts',
+    'Science',
+    'Commerce',
   ];
 
   var _validationMessage = "";
@@ -372,7 +373,14 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         color: Color.fromRGBO(162, 7, 48, 1)),
                                     value: _courseValue,
                                     icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: courseItems.map((String items) {
+                                    items: _yearValue=="FYJC"||_yearValue=="SYJC"?
+                                    courseItems2.map((String items) {
+                                      return DropdownMenuItem(
+                                        value: items,
+                                        child: Text(items),
+                                      );
+                                    }).toList():
+                                    courseItems1.map((String items) {
                                       return DropdownMenuItem(
                                         value: items,
                                         child: Text(items),

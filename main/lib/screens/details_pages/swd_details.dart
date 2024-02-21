@@ -38,7 +38,6 @@ class _DetailsFormState extends State<DetailsForm> {
     'FY',
     'SY',
     'TY',
-    'Masters',
   ];
 
   var courseItems1 = [
