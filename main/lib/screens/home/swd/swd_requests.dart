@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:main/components/Card/swdCard.dart';
 
 class SwdRequests extends StatefulWidget {
   const SwdRequests({super.key});
@@ -8,8 +9,22 @@ class SwdRequests extends StatefulWidget {
 }
 
 class _SwdRequestsState extends State<SwdRequests> {
+  dynamic data;
+  @override
+  void initState() {
+    // call when retrieving data from swd db
+    super.initState();
+    setState(() {
+    data = [];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Your requests"),);
+    if (data==[] && data == null) {
+      return const Center(child: Text("No Requests"));
+    } else {
+      return SwdCard(data: data);
+    }
   }
 }
