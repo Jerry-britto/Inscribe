@@ -13,13 +13,14 @@ class SwdHome extends StatefulWidget {
 }
 
 class _SwdHomeState extends State<SwdHome> {
+  
 
   Widget displayScreen(int idx) {
     switch (idx) {
       case 0:
         return SwdProfile(emailText: widget.emailText);
       case 1:
-        return const FindScribe();
+        return  FindScribe(email: widget.emailText.toString(),);
       case 2:
         return const SwdRequests();
       default:
