@@ -64,7 +64,7 @@ class _SwdProfileState extends State<SwdProfile> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
-                              data!["imageUrl"]!="" ?data!["imageUrl"]:
+                            data!.containsKey("imageUrl") && data!["imageUrl"]!="" ?data!["imageUrl"]:
                               "https://images.pexels.com/photos/17604370/pexels-photo-17604370/free-photo-of-beautiful-woman-sitting-under-a-tree.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
                               height: 150,
                               width: 150,
