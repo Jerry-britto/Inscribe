@@ -18,11 +18,11 @@ class _SwdHomeState extends State<SwdHome> {
   Widget displayScreen(int idx) {
     switch (idx) {
       case 0:
-        return SwdProfile(emailText: widget.emailText);
+        return SwdProfile(emailText: widget.emailText!.toString());
       case 1:
-        return  FindScribe(email: widget.emailText.toString(),);
+        return  FindScribe(email: widget.emailText!.toString(),);
       case 2:
-        return const SwdRequests();
+        return  SwdRequests(email: widget.emailText!.toString(),);
       default:
         return SwdProfile(emailText: widget.emailText);
     }
