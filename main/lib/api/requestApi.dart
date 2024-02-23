@@ -34,6 +34,7 @@ class RequestApi {
         await db.collection("Requests").add({
           "swdId": SwdData!["email"],
           "scribeId": scribe,
+          "status":"pending",
           "examData": {
             "subjectName": subject,
             "examType": examType,
