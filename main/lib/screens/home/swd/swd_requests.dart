@@ -21,10 +21,16 @@ class _SwdRequestsState extends State<SwdRequests> {
 
   @override
   Widget build(BuildContext context) {
-    if (data==[] && data == null) {
-      return const Center(child: Text("No Requests"));
-    } else {
-      return SwdCard(data: data);
-    }
-  }
+    return const Column(
+      children: [
+        SwdCard(data:null),
+        //SwdCard(data:null),
+      ],
+    );
+  //   if (data==[] && data == null) {
+  //     return const Center(child: Text("No Requests"));
+  //   } else {
+  //     return SwdCard(data: data);
+  //   }
+   }
 }

@@ -41,11 +41,44 @@ class SwdCard extends StatefulWidget {
 }
 
 class _SwdCardState extends State<SwdCard> {
+  String status = "pending";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: const Text("swd card"),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 5, right: 15, left: 15),
+      child: Card(
+        // color: status == "pending" ? Colors.yellow : Colors.green.shade100,
+        child: Container(
+            padding: const EdgeInsets.only(right:0, left: 15, top:15, bottom:5),
+            width: 320,
+            height: 100,
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Status: $status"),
+                    Text(
+                      "Pending",
+                      style: TextStyle(
+                          fontSize: 25, color: Colors.amber.shade400),
+                    ), 
+                  ],
+                ),
+                const SizedBox(width: 150),
+                const Column(
+                  children: [
+                    SizedBox(height: 55),
+                    Text(
+                    "Details",
+                    style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            ),
+      ),
     );
   }
 }
