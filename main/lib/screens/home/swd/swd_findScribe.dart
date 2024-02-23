@@ -119,15 +119,18 @@ class _FindScribeState extends State<FindScribe> {
     });
     print("\nvolunters data $vols");
 
-    await db.collection("Requests").add({
+    await db.collection("Requests").add(
+      {
       "swdId": SwdData!["email"],
       "scribeId": vols[0]["email"],
+      'status':'pending',
       "examData": {
         "subjectName": subject,
         "examType": examType,
         "dateAndTime": examDate
       }
-    });
+    }
+    );
     vols.removeAt(0);
     await db.collection("SWD").doc(SwdData!["email"]).update({"vols": vols});
   }
