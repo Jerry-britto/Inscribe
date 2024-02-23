@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
+import 'package:main/api/requestApi.dart';
 
 class FindScribe extends StatefulWidget {
   const FindScribe({super.key, this.email});
@@ -20,120 +21,6 @@ class _FindScribeState extends State<FindScribe> {
   Map<String, dynamic>? SwdData;
   final db = FirebaseFirestore.instance;
 
-  Future<void> getData() async {
-    // if swd applied for more than 1 exam
-    print(SwdData);
-    print("\n Appllied first time for exam \n");
-
-    // retrieve swd data
-    await db
-        .collection("SWD")
-        .doc(widget.email.toString().toLowerCase())
-        .get()
-        .then(
-      (DocumentSnapshot doc) {
-        setState(() {
-          SwdData = doc.data() as Map<String, dynamic>;
-        });
-        // ...
-        print("Swd data is as follows: $SwdData");
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
-  }
-
-  Future<void> findScribe(
-      String examType, String subject, String examDate) async {
-    print(
-        "Your examtype is ${examType} and your subject is ${subject} and date is ${examDate}");
-    print(SwdData);
-    if (SwdData!.containsKey("vols")) {
-      List vols = SwdData!["vols"];
-      if (vols.isNotEmpty) {
-        print("applied for more than 1 exam");
-        print("Available vols $vols");
-        String scribe = vols[0]["email"];
-
-        print("Assigned Scribe $scribe");
-        vols.removeAt(0);
-        print("new vols data $vols");
-
-        await db.collection("Requests").add({
-          "swdId": SwdData!["email"],
-          "scribeId": scribe,
-          "examData": {
-            "subjectName": subject,
-            "examType": examType,
-            "dateAndTime": examDate
-          }
-        });
-        await db
-            .collection("SWD")
-            .doc(SwdData!["email"])
-            .update({"vols": vols})
-            .then((value) => print("vols list updated"))
-            .onError((error, stackTrace) => print("vols list not updated"));
-        return;
-      }
-    }
-    List vols = [];
-    // filtering list of scribes
-    print(
-        "course is ${SwdData!['course']} and he belongs to year: ${SwdData!["year"]} and his age is ${SwdData!["age"]}");
-    // filtered based on different course and one year smaller
-    await db
-        .collection("Scribes")
-        .where("age", isLessThanOrEqualTo: SwdData!["age"])
-        .orderBy("age", descending: true)
-        .limit(7)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      List<QueryDocumentSnapshot> documents = querySnapshot.docs;
-
-      for (QueryDocumentSnapshot document in documents) {
-        if (document["year"] != SwdData!["year"] &&
-            document["course"] != SwdData!["course"]) {
-          print("Document ID: ${document.id}");
-          print(document.data());
-          final data = document.data();
-          vols.add(data);
-          print("-------------");
-        }
-      }
-    }).onError((error, stackTrace) {
-      print("could not filter data");
-      showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                title: const Text(
-                    "Could not find a scribe with your matching criteria"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, "OK");
-                      },
-                      child: const Text("Ok"))
-                ],
-              ));
-      return;
-    });
-    print("\nvolunters data $vols");
-
-    await db.collection("Requests").add(
-      {
-      "swdId": SwdData!["email"],
-      "scribeId": vols[0]["email"],
-      'status':'pending',
-      "examData": {
-        "subjectName": subject,
-        "examType": examType,
-        "dateAndTime": examDate
-      }
-    }
-    );
-    vols.removeAt(0);
-    await db.collection("SWD").doc(SwdData!["email"]).update({"vols": vols});
-  }
 
   @override
   void setState(VoidCallback fn) {
@@ -365,7 +252,7 @@ class _FindScribeState extends State<FindScribe> {
                           MaterialStateProperty.all<Color>(Colors.white),
                     ),
                     onPressed: () async {
-                      await getData();
+                      // await getData();
                       if ((_formKey.currentState!.validate() == true)) {
                         print(selectedDate);
                         print(_subName.text);
@@ -388,17 +275,32 @@ class _FindScribeState extends State<FindScribe> {
                           }
                         });
                         print("Button pressed");
-                        findScribe(
-                            examType, _subName.text, selectedDate.toString());
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text('Request Sent Successfully!'),
-                          action: SnackBarAction(
-                            label: 'OK',
-                            onPressed: () {
-                              // Some code to undo the change.
-                            },
-                          ),
-                        ));
+                        // findScribe(
+                        // examType, _subName.text, selectedDate.toString());
+                        try {
+                          await RequestApi().findScribe(examType, _subName.text,
+                              selectedDate.toString(), widget.email.toString());
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Request Sent Successfully!'),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          ));
+                        } catch (error) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text(
+                                'No scribe found which meets the requirements'),
+                            action: SnackBarAction(
+                              label: 'OK',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          ));
+                        }
                       }
                     },
                     child: const Text('SEND REQUEST'),

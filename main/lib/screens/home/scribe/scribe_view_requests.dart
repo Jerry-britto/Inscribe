@@ -32,6 +32,13 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
           print("Error displayed while getting requests of scribe");
         });
   }
+
+  // logic for accepting request
+  Future<void>acceptRequest() async {
+
+  }
+
+
   @override
   void initState() {
     super.initState();
