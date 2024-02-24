@@ -63,13 +63,20 @@ class _ScribeProfileState extends State<ScribeProfile> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                            data!["imageUrl"]!=""?data!["imageUrl"]:
-                              "https://images.pexels.com/photos/17604370/pexels-photo-17604370/free-photo-of-beautiful-woman-sitting-under-a-tree.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-                              height: 150,
-                              width: 150,
-                              fit: BoxFit.cover),
-                        )
+                          child: data!.containsKey("imageUrl") &&
+                                  data!["imageUrl"] != ""
+                              ? Image.network(
+                                  data!["imageUrl"],
+                                  fit: BoxFit.cover,
+                                  height: 150,
+                                  width: 150,
+                                )
+                              : const Icon(
+                                  Icons.person,
+                                  color: Color.fromRGBO(162, 7, 48, 1),
+                                  size: 100,
+                                ),
+                        ),
                       ],
                     ),
                     Row(
@@ -177,18 +184,26 @@ class _ScribeProfileState extends State<ScribeProfile> {
                         CircleAvatar(
                           backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
                           child: IconButton(
-                            iconSize: 32,
-                            color: Colors.white,
-                            onPressed: () {
-                              print("edit details");
-                              print(data);
-                              // print();
-                              Future.delayed(const Duration(milliseconds: 1000),(){
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsForm2(emailText: widget.emailText.toString())));
-                              });
-                            },
-                            icon: Image.asset("assets/icons/pencil.png",color: Colors.white,)
-                          ),
+                              iconSize: 32,
+                              color: Colors.white,
+                              onPressed: () {
+                                print("edit details");
+                                print(data);
+                                // print();
+                                Future.delayed(
+                                    const Duration(milliseconds: 1000), () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => DetailsForm2(
+                                              emailText: widget.emailText
+                                                  .toString())));
+                                });
+                              },
+                              icon: Image.asset(
+                                "assets/icons/pencil.png",
+                                color: Colors.white,
+                              )),
                         ),
                         const SizedBox(
                           width: 20,

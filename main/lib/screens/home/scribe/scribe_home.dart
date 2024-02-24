@@ -22,11 +22,11 @@ class _ScribeHomeState extends State<ScribeHome> {
   Widget displayScreen(int idx) {
     switch (idx) {
       case 0:
-        return ScribeProfile(emailText: widget.emailText);
+        return ScribeProfile(emailText: widget.emailText!.toString());
       case 1:
-        return const ViewSwdRequests();
+        return  ViewSwdRequests(email: widget.emailText!.toString(),);
       default:
-        return ScribeProfile(emailText: widget.emailText);
+        return ScribeProfile(emailText: widget.emailText!.toString());
     }
   }
 
@@ -52,6 +52,7 @@ class _ScribeHomeState extends State<ScribeHome> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             tooltip: "Logout",
