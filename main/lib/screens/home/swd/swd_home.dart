@@ -51,6 +51,7 @@ class _SwdHomeState extends State<SwdHome> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             tooltip: "Logout",

@@ -52,6 +52,7 @@ class _ScribeHomeState extends State<ScribeHome> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             tooltip: "Logout",

@@ -63,12 +63,7 @@ class _SwdProfileState extends State<SwdProfile> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                            data!.containsKey("imageUrl") && data!["imageUrl"]!="" ?data!["imageUrl"]:
-                              "https://images.pexels.com/photos/17604370/pexels-photo-17604370/free-photo-of-beautiful-woman-sitting-under-a-tree.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-                              height: 150,
-                              width: 150,
-                              fit: BoxFit.cover),
+                          child:data!.containsKey("imageUrl") && data!["imageUrl"]!="" ?Image.network(data!["imageUrl"],fit: BoxFit.cover,height: 150,width: 150,): const Icon(Icons.person,color: Color.fromRGBO(162, 7, 48, 1),size: 100,),
                         ),
                       ],
                     ),
