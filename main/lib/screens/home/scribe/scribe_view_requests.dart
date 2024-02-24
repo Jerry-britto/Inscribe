@@ -40,6 +40,11 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
   Future<void> acceptRequest() async {
     dynamic id = listOfRequest[0]['docid'];
     print('id: $id and data is ${listOfRequest[0]['data']}');
+    final snapshot = await FirebaseFirestore.instance
+        .collection("SWD")
+        .doc(listOfRequest[0]['data']['swdId'])
+        .get();
+        print(snapshot.data());
     await FirebaseFirestore.instance
         .collection("Requests")
         .doc(id)
