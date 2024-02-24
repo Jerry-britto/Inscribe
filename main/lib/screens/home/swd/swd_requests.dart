@@ -10,6 +10,53 @@ class SwdRequests extends StatefulWidget {
 
 class _SwdRequestsState extends State<SwdRequests> {
   dynamic data;
+    List<Map<String,dynamic>>request=[
+    {
+      'scribeId':null,
+      'status':"pending",
+      "examData":{
+        'dateAndTime':"12th Feb 9 am",
+        "examType":"CIA 1",
+        "subjectName":"History",
+      },
+    },
+    {
+      'scribeId':null,
+      'status':"pending",
+      "examData":{
+        'dateAndTime':"12th Feb 9 am",
+        "examType":"CIA 1",
+        "subjectName":"History",
+      },
+    },
+    {
+      'scribeId':"sahil",
+      'status':"accepted",
+      "examData":{
+        'dateAndTime':"12th Feb 9 am",
+        "examType":"CIA 1",
+        "subjectName":"History",
+      },
+    },
+    {
+      'scribeId':"jerry",
+      'status':"accepted",
+      "examData":{
+        'dateAndTime':"12th Feb 9 am",
+        "examType":"CIA 1",
+        "subjectName":"History",
+      },
+    },
+    {
+      'scribeId':"isha",
+      'status':"accepted",
+      "examData":{
+        'dateAndTime':"12th Feb 9 am",
+        "examType":"CIA 1",
+        "subjectName":"History",
+      },
+    },
+  ];
   @override
   void initState() {
     // call when retrieving data from swd db
@@ -21,16 +68,17 @@ class _SwdRequestsState extends State<SwdRequests> {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SwdCard(data:null),
-        //SwdCard(data:null),
-      ],
+    if(data==null)
+    {
+      return const Center(child:Text("No Requests"));
+    }
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(request.length, (index) {
+          return SwdCard(data:request[index]);
+        })
+      ),
     );
-  //   if (data==[] && data == null) {
-  //     return const Center(child: Text("No Requests"));
-  //   } else {
-  //     return SwdCard(data: data);
-  //   }
+    
    }
 }

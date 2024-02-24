@@ -15,7 +15,7 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 4), () {
       //navigator to navigate between screens
       //in push it will back screen but of won't take him back
       Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -38,7 +38,7 @@ class SplashScreenState extends State<SplashScreen>
         child: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
-            color: const Color.fromRGBO(162, 7, 48, 1),
+            color:  Color.fromRGBO(162, 7, 48, 1),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

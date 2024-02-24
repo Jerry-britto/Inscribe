@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class SwdCard extends StatefulWidget {
   const SwdCard({super.key, this.data});
-  final dynamic data;
-
+  final Map<String, dynamic>? data;
   /*
   data will consist of the following things:-
   1. scribe id (email id)
@@ -41,43 +40,148 @@ class SwdCard extends StatefulWidget {
 }
 
 class _SwdCardState extends State<SwdCard> {
-  String status = "pending";
+  String status="pending";
+  dynamic color1;
+  dynamic statusIcon;
+  @override
+  void initState()
+  {
+    status=widget.data!['status'];
+    super.initState();
+    if(status=="pending")
+    {
+      setState(() {
+        color1=Colors.amber.shade800;
+        statusIcon=Icon(Icons.pending, color:color1, size: 82);
+      });
+    }
+    else
+    {
+      setState(() {
+        color1=Colors.green;
+        statusIcon=Icon(Icons.check_circle, color:color1, size: 82);
+      });
+    }
+  }
+  
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 5, right: 15, left: 15),
-      child: Card(
-        // color: status == "pending" ? Colors.yellow : Colors.green.shade100,
-        child: Container(
-            padding: const EdgeInsets.only(right:0, left: 15, top:15, bottom:5),
-            width: 320,
-            height: 100,
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Status: $status"),
-                    Text(
-                      "Pending",
-                      style: TextStyle(
-                          fontSize: 25, color: Colors.amber.shade400),
-                    ), 
-                  ],
-                ),
-                const SizedBox(width: 150),
-                const Column(
-                  children: [
-                    SizedBox(height: 55),
-                    Text(
-                    "Details",
-                    style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
-                    ),
-                  ],
-                ),
-              ],
+      child: Expanded(
+        child: Card(
+          child: Container(
+              padding: const EdgeInsets.only(right:0, left: 15, top:15, bottom:5),
+              width: 400,
+              height: 150,
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        width:200,
+                        child:Column(
+                          children:[
+                            Text(
+                              "Status: $status",
+                              style: TextStyle(fontWeight: FontWeight.bold,fontSize:20, color: color1)
+                            ),
+                            const SizedBox(height:10),
+                            Text(
+                              'Subject: ${widget.data!['examData']['subjectName']}',
+                              textAlign: TextAlign.left,                           
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              'Type of Exam: ${widget.data!['examData']['examType']}',
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            const Text(
+                              'Date and Time:',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Text(
+                              '${widget.data!['examData']['dateAndTime']}',
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      statusIcon,
+                      Visibility(
+                        visible:status!="pending",
+                        child: TextButton(
+                          child: const Text(
+                            "Details",
+                            style: TextStyle(color: Colors.blue, fontSize: 15),
+                          ),
+                          onPressed: (){
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: const Color.fromRGBO(162, 7 , 48, 1),
+                                  ),
+                                  padding: const EdgeInsets.all(20),
+                                  height:250,
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        const Text(
+                                          "SCRIBE DETAILS",
+                                          style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height:10),
+                                        Text(
+                                          "Scribe Name: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                        Text(
+                                          "Scribe Contact No: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                        Text(
+                                          "Scribe Email ID: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                        Text(
+                                          "Scribe UID: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                        Text(
+                                          "Year: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                        Text(
+                                          "Course: ${widget.data!['scribeId']}",
+                                          style: const TextStyle(fontSize: 15, color: Colors.white)
+                                        ),
+                                      ], 
+                                    ),
+                                  ),
+                                );
+                              }
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            ),
+        ),
       ),
     );
   }
