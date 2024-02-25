@@ -467,6 +467,9 @@ class _DetailsFormState extends State<DetailsForm> {
                                                     source: ImageSource.camera);
                                             if (file == null) {
                                               print("No file found ");
+                                              setState(() {
+                                                uploadStatus = false;
+                                              });
                                               // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                               return;
                                             }
@@ -546,6 +549,9 @@ class _DetailsFormState extends State<DetailsForm> {
                                                         ImageSource.gallery);
                                             if (file == null) {
                                               print("No file found ");
+                                              setState(() {
+                                                uploadStatus = false;
+                                              });
                                               // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                               return;
                                             }
