@@ -58,29 +58,7 @@ class _FindScribeState extends State<FindScribe> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(3),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Please Enter Correct Exam Details",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                          const SizedBox(height: 5,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -211,7 +189,7 @@ class _FindScribeState extends State<FindScribe> {
                               ),
                             ),
                             firstDate:
-                                DateTime.now().add(const Duration(days: 0)),
+                                DateTime.now().add(const Duration(days: 2)),
                             lastDate:
                                 DateTime.now().add(const Duration(days: 365)),
                             //initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),

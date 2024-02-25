@@ -37,7 +37,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'SY',
     'TY',
   ];
-
+  String uploadLabel = "Add Profile pic";
   var courseItems1 = [
     'Select',
     'BSc',
@@ -373,19 +373,20 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         color: Color.fromRGBO(162, 7, 48, 1)),
                                     value: _courseValue,
                                     icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: _yearValue=="FYJC"||_yearValue=="SYJC"?
-                                    courseItems2.map((String items) {
-                                      return DropdownMenuItem(
-                                        value: items,
-                                        child: Text(items),
-                                      );
-                                    }).toList():
-                                    courseItems1.map((String items) {
-                                      return DropdownMenuItem(
-                                        value: items,
-                                        child: Text(items),
-                                      );
-                                    }).toList(),
+                                    items: _yearValue == "FYJC" ||
+                                            _yearValue == "SYJC"
+                                        ? courseItems2.map((String items) {
+                                            return DropdownMenuItem(
+                                              value: items,
+                                              child: Text(items),
+                                            );
+                                          }).toList()
+                                        : courseItems1.map((String items) {
+                                            return DropdownMenuItem(
+                                              value: items,
+                                              child: Text(items),
+                                            );
+                                          }).toList(),
                                     onChanged: (String? value) => setState(
                                         () => _courseValue = value.toString()),
                                     //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
@@ -399,12 +400,9 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                             ),
                             Container(
                               padding: const EdgeInsets.all(9),
-                            
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                
                                   FloatingActionButton.extended(
                                     backgroundColor:
                                         const Color.fromRGBO(162, 7, 48, 1),
@@ -434,6 +432,9 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                                 .camera);
                                                     if (file == null) {
                                                       print("No file found ");
+                                                      setState(() {
+                                                        uploadStatus = false;
+                                                      });
                                                       // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                                       return;
                                                     }
@@ -476,12 +477,24 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                       imageUrl =
                                                           await refImageToBeUploaded
                                                               .getDownloadURL();
+                                                      setState(() {
+                                                        uploadLabel =
+                                                            "Uploaded Profile pic";
+                                                      });
                                                       print(
                                                           "Image url: $imageUrl");
                                                     } on FirebaseException catch (err) {
                                                       print(err.message
                                                           .toString());
+                                                      setState(() {
+                                                        uploadLabel =
+                                                            "No Profile pic";
+                                                      });
                                                     } catch (e) {
+                                                      setState(() {
+                                                        uploadLabel =
+                                                            "No Profile pic";
+                                                      });
                                                       print(
                                                           "File was not uploaded due to ${e.toString()}");
                                                     } finally {
@@ -509,6 +522,9 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                                 .gallery);
                                                     if (file == null) {
                                                       print("No file found ");
+                                                      setState(() {
+                                                        uploadStatus = false;
+                                                      });
                                                       // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                                       return;
                                                     }
@@ -575,9 +591,9 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                       );
                                     },
                                     label: !uploadStatus
-                                        ? const Text(
-                                            "Add profile pic",
-                                            style: TextStyle(
+                                        ? Text(
+                                            uploadLabel,
+                                            style: const TextStyle(
                                               color: Colors.white,
                                             ),
                                           )
@@ -692,21 +708,21 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                               ),
                               onPressed: () {
                                 if (uploadStatus) {
-                          showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                    title: const Text(
-                                        "Your profile photo is yet to be uploaded"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'OK'),
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  ));
-                          return;
-                        }
+                                  showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                            title: const Text(
+                                                "Your profile photo is yet to be uploaded"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ));
+                                  return;
+                                }
                                 dropDownValidate();
                                 if ((_formKey.currentState!.validate() ==
                                         true) &&

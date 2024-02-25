@@ -110,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           centerTitle: true,
           backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+          automaticallyImplyLeading: false,
         ),
         body: GestureDetector(
           onTap: () {
@@ -279,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 TextButton(
                                     onPressed: () {
                                       Future.delayed(
-                                          const Duration(milliseconds: 600),
+                                          const Duration(milliseconds: 100),
                                           () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(

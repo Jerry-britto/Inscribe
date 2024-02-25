@@ -28,7 +28,7 @@ class _DetailsFormState extends State<DetailsForm> {
   String _yearValue = 'Select';
   String _courseValue = 'Select';
   bool uploadStatus = false;
-
+  String uploadLabel = "Add Profile pic";
   // List of items in our dropdown menu
 
   var yearItems = [
@@ -467,6 +467,9 @@ class _DetailsFormState extends State<DetailsForm> {
                                                     source: ImageSource.camera);
                                             if (file == null) {
                                               print("No file found ");
+                                              setState(() {
+                                                uploadStatus = false;
+                                              });
                                               // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                               return;
                                             }
@@ -504,10 +507,21 @@ class _DetailsFormState extends State<DetailsForm> {
                                               imageUrl =
                                                   await refImageToBeUploaded
                                                       .getDownloadURL();
+                                              setState(() {
+                                                uploadLabel = "Image Uploaded";
+                                              });
                                               print("Image url: $imageUrl");
                                             } on FirebaseException catch (err) {
                                               print(err.message.toString());
+                                              setState(() {
+                                                uploadLabel =
+                                                    "Image not Uploaded";
+                                              });
                                             } catch (e) {
+                                              setState(() {
+                                                uploadLabel =
+                                                    "Image not Uploaded";
+                                              });
                                               print(
                                                   "File was not uploaded due to ${e.toString()}");
                                             } finally {
@@ -535,6 +549,9 @@ class _DetailsFormState extends State<DetailsForm> {
                                                         ImageSource.gallery);
                                             if (file == null) {
                                               print("No file found ");
+                                              setState(() {
+                                                uploadStatus = false;
+                                              });
                                               // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kindly upload a photo")));
                                               return;
                                             }
@@ -573,6 +590,9 @@ class _DetailsFormState extends State<DetailsForm> {
                                                   await refImageToBeUploaded
                                                       .getDownloadURL();
                                               print("Image url: $imageUrl");
+                                              setState(() {
+                                                uploadLabel = "Image Uploaded";
+                                              });
                                             } on FirebaseException catch (err) {
                                               print(err.message.toString());
                                             } catch (e) {
@@ -594,9 +614,9 @@ class _DetailsFormState extends State<DetailsForm> {
                               );
                             },
                             label: !uploadStatus
-                                ? const Text(
-                                    "Add profile pic",
-                                    style: TextStyle(
+                                ? Text(
+                                    uploadLabel,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                     ),
                                   )
