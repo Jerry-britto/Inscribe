@@ -211,7 +211,7 @@ class _FindScribeState extends State<FindScribe> {
                               ),
                             ),
                             firstDate:
-                                DateTime.now().add(const Duration(days: 0)),
+                                DateTime.now().add(const Duration(days: 2)),
                             lastDate:
                                 DateTime.now().add(const Duration(days: 365)),
                             //initialPickerDateTime: DateTime.now().add(const Duration(days: 0)),

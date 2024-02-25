@@ -52,7 +52,7 @@ class _SwdProfileState extends State<SwdProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          data?["name"],
+                          data?["name"] != null ? data!['name'] : "",
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w400),
                         )
@@ -63,7 +63,15 @@ class _SwdProfileState extends State<SwdProfile> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child:data!.containsKey("imageUrl") && data!["imageUrl"]!="" ?Image.network(data!["imageUrl"],fit: BoxFit.cover,height: 150,width: 150,): const Icon(Icons.person,color: Color.fromRGBO(162, 7, 48, 1),size: 100,),
+                          child: data!.containsKey("imageUrl") &&
+                                  data!["imageUrl"] != ""
+                              ? 
+                              FadeInImage(placeholder:  AssetImage("assets/images/dummyAvatar.png"), image: NetworkImage(data!['imageUrl']),height: 150,width: 150,fit: BoxFit.cover,)
+                              : const Icon(
+                                  Icons.person,
+                                  color: Color.fromRGBO(162, 7, 48, 1),
+                                  size: 100,
+                                ),
                         ),
                       ],
                     ),
@@ -92,7 +100,9 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data?['disability']}",
+                          data!['disability'] != null
+                              ? " ${data?['disability']}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -120,7 +130,9 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['uid'].toString()}",
+                          data!['uid'] != null
+                              ? " ${data!['uid'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -135,7 +147,7 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['year']}",
+                          data!['year'] != null ? " ${data!['year']}" : '',
                           style: customTextStyle,
                         ),
                         const SizedBox(
@@ -146,7 +158,7 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['course']}",
+                          data!['course'] != null ? " ${data!['course']}" : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -161,7 +173,9 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['age'].toString()}",
+                          data!['age'] != null
+                              ? " ${data!['age'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -176,7 +190,9 @@ class _SwdProfileState extends State<SwdProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['phoneNo'].toString()}",
+                          data!['phoneNo'] != null
+                              ? " ${data!['phoneNo'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -192,8 +208,14 @@ class _SwdProfileState extends State<SwdProfile> {
                               onPressed: () {
                                 print("edit details");
                                 print(data);
-                                Future.delayed(const Duration(milliseconds: 1000),(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (_)=>DetailsForm(emailText: widget.emailText.toString())));
+                                Future.delayed(
+                                    const Duration(milliseconds: 1000), () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => DetailsForm(
+                                              emailText: widget.emailText
+                                                  .toString())));
                                 });
                                 // print();
                               },

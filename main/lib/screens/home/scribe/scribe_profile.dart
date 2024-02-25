@@ -52,7 +52,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          data?["name"],
+                          data!["name"] != null ? data!['name'] : '',
                           style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w400),
                         )
@@ -65,11 +65,13 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           borderRadius: BorderRadius.circular(100),
                           child: data!.containsKey("imageUrl") &&
                                   data!["imageUrl"] != ""
-                              ? Image.network(
-                                  data!["imageUrl"],
-                                  fit: BoxFit.cover,
+                              ? FadeInImage(
+                                  placeholder: AssetImage(
+                                      "assets/images/dummyAvatar.png"),
+                                  image: NetworkImage(data!['imageUrl']),
                                   height: 150,
                                   width: 150,
+                                  fit: BoxFit.cover,
                                 )
                               : const Icon(
                                   Icons.person,
@@ -117,7 +119,9 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['uid'].toString()}",
+                          data!['uid'] != null
+                              ? " ${data!['uid'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -132,7 +136,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['year']}",
+                          data!['year'] != null ? " ${data!['year']}" : '',
                           style: customTextStyle,
                         ),
                         const SizedBox(
@@ -143,7 +147,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['course']}",
+                          data!['course'] != null ? " ${data!['course']}" : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -158,7 +162,9 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['age'].toString()}",
+                          data!['age'] != null
+                              ? " ${data!['age'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
@@ -173,7 +179,9 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           style: customTextStyle,
                         ),
                         Text(
-                          " ${data!['phoneNo'].toString()}",
+                          data!['phoneNo'] != null
+                              ? " ${data!['phoneNo'].toString()}"
+                              : '',
                           style: customTextStyle,
                         ),
                       ],
