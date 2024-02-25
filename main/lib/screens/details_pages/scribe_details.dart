@@ -37,7 +37,7 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'SY',
     'TY',
   ];
-
+  String uploadLabel= "Add Profile pic";
   var courseItems1 = [
     'Select',
     'BSc',
@@ -476,12 +476,21 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                                       imageUrl =
                                                           await refImageToBeUploaded
                                                               .getDownloadURL();
+                                                          setState(() {
+                                                            uploadLabel = "Uploaded Profile pic";
+                                                          });
                                                       print(
                                                           "Image url: $imageUrl");
                                                     } on FirebaseException catch (err) {
                                                       print(err.message
                                                           .toString());
+                                                           setState(() {
+                                                            uploadLabel = "No Profile pic";
+                                                          });
                                                     } catch (e) {
+                                                        setState(() {
+                                                            uploadLabel = "No Profile pic";
+                                                          });
                                                       print(
                                                           "File was not uploaded due to ${e.toString()}");
                                                     } finally {
@@ -575,9 +584,9 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                       );
                                     },
                                     label: !uploadStatus
-                                        ? const Text(
-                                            "Add profile pic",
-                                            style: TextStyle(
+                                        ?  Text(
+                                            uploadLabel,
+                                            style: const TextStyle(
                                               color: Colors.white,
                                             ),
                                           )
