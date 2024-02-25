@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:main/components/Card/scribeCard.dart';
-
-import '../../../api/requestApi.dart';
-
 class ViewSwdRequests extends StatefulWidget {
   const ViewSwdRequests({super.key, this.email});
   final String? email;
@@ -13,60 +10,8 @@ class ViewSwdRequests extends StatefulWidget {
 }
 
 class _ViewSwdRequestsState extends State<ViewSwdRequests> {
+    
   List<Map<String, dynamic>> listOfRequest =[];
-    // {
-    //   "docid":123456,
-    //   "data":{
-    //     "scribeId": "isha",
-    //     "swdData": "abc",
-    //     "status": "accepted"
-    //   },
-    //   "examData":{
-    //     'dateAndTime':"12th Feb 9 am",
-    //     "examType":"CIA 1",
-    //     "subjectName":"History",
-    //   }
-    // },
-    // {
-    //   "docid":123456,
-    //   "data":{
-    //     "scribeId": "isha",
-    //     "swdData": "abc",
-    //     "status": "pending"
-    //   },
-    //   "examData":{
-    //     'dateAndTime':"12th Feb 9 am",
-    //     "examType":"CIA 1",
-    //     "subjectName":"Geography",
-    //   }
-    // },
-    // {
-    //   "docid":123456,
-    //   "data":{
-    //     "scribeId": "isha",
-    //     "swdData": "abc",
-    //     "status": "pending"
-    //   },
-    //   "examData":{
-    //     'dateAndTime':"12th Feb 9 am",
-    //     "examType":"CIA 1",
-    //     "subjectName":"Math",
-    //   }
-    // },
-    // {
-    //   "docid":123456,
-    //   "data":{
-    //     "scribeId": "isha",
-    //     "swdData": "abc",
-    //     "status": "pending"
-    //   },
-    //   "examData":{
-    //     'dateAndTime':"12th Feb 9 am",
-    //     "examType":"CIA 1",
-    //     "subjectName":"English",
-    //   }
-    // },
-  
   Future<void> getRequests() async {
     print("\n scribe email id: ${widget.email.toString()}");
     print('\n');
@@ -79,11 +24,13 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
       for (QueryDocumentSnapshot doc in documents) {
         print(doc.data()); 
         final data = {'docid': doc.id, 'data': doc.data()};
+        setState(() {
         listOfRequest.add(data);
+        });
       }
       print(
           "\n\n list of requests is as follows with length ${listOfRequest.length}");
-      print('\n $listOfRequest');
+      print('\n $listOfRequest\n\n');
     }).onError((error, stackTrace) {
       print("Error displayed while getting requests of scribe");
     });
@@ -121,9 +68,9 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
     //       child: Text("Your requests from SWD...."),
     //     ),
     //     ElevatedButton(
-    //         onPressed: acceptRequest, child: const Text("accept request")),
+    //         onPressed: (){}, child: const Text("accept request")),
     //     ElevatedButton(
-    //         onPressed: declineRequest, child: const Text("decline request"))
+    //         onPressed: (){}, child: const Text("decline request"))
     //   ],
     // );
   }
