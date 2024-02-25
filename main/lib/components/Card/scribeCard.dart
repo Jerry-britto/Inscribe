@@ -126,7 +126,7 @@ class _ScribeCardState extends State<ScribeCard> {
                     children: [
                       Container(
                         alignment: Alignment.topLeft,
-                        width: 180,
+                        width: 250,
                         child: Column(
                           children: [
                             Text(
