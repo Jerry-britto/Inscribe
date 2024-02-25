@@ -46,16 +46,24 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView(
-        children:[
-          listOfRequest==[]?
-          const Center(child: Text("No Requests")):
-          Column(
-            children: List.generate(listOfRequest.length, (index) {
-              return ScribeCard(data:listOfRequest[index], index: index);
-            }),
-          ),
-        ],
+      child: RefreshIndicator(
+        onRefresh: () async{
+          setState(() {
+          listOfRequest.clear();
+          });
+          await getRequests();
+        },
+        child: ListView(
+          children:[
+            listOfRequest==[] || listOfRequest.isEmpty?
+            const Center(child: Text("No Requests")):
+            Column(
+              children: List.generate(listOfRequest.length, (index) {
+                return ScribeCard(data:listOfRequest[index], index: index);
+              }),
+            ),
+          ],
+        ),
       ),
     );
       

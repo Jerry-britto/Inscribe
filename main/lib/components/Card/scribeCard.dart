@@ -42,8 +42,19 @@ class _ScribeCardState extends State<ScribeCard> {
         .collection("Requests")
         .doc(id)
         .update({"status": "accepted"}).then((value) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Thank you")));
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                content:
+                    const Text("You may refresh the page to see the changes"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
     }).onError((error, stackTrace) {
       print('not accepted request');
       ScaffoldMessenger.of(context)

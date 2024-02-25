@@ -89,17 +89,24 @@ class _SwdRequestsState extends State<SwdRequests> {
 
   @override
   Widget build(BuildContext context) {
-    if(listOfRequests==[])
-    {
-      return const Center(child:Text("No Requests"));
-    }
-    return SingleChildScrollView(
-      child: Column(
+    return Container(
+      child: RefreshIndicator(
+        onRefresh: () async{
+          setState(() {
+          listOfRequests.clear();
+          });
+          await getRequests();
+        },
+        child: listOfRequests==[] || listOfRequests.isEmpty?const Center(child:Text("No Requests")):ListView(
+      children: [Column(
         children: List.generate(listOfRequests.length, (index) {
           return SwdCard(data:listOfRequests[index]);
         })
+      ),],
+    ),
       ),
     );
+    
     
    }
 }
