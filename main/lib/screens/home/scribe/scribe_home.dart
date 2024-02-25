@@ -89,7 +89,7 @@ class _ScribeHomeState extends State<ScribeHome> {
                 text = "Profile";
                 break;
               case 1:
-                text = "Your Requests";
+                text = "Requests";
                 break;
               default:
             }

@@ -85,7 +85,7 @@ class _SwdCardState extends State<SwdCard> {
             padding:
                 const EdgeInsets.only(right: 0, left: 15, top: 15, bottom: 5),
             width: 400,
-            height: 150,
+            height: 170,
             child: Row(
               children: [
                 Column(
@@ -93,7 +93,7 @@ class _SwdCardState extends State<SwdCard> {
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
-                      width: 200,
+                      width: 250,
                       child: Column(
                         children: [
                           Text("Status: $status",
@@ -166,15 +166,15 @@ class _SwdCardState extends State<SwdCard> {
                                           style: const TextStyle(fontSize: 15, color: Colors.white)
                                         ),
                                         Text(
-                                          "Scribe Contact No: ${scribeData!['phoneNo']}",
+                                          "Contact No: ${scribeData!['phoneNo']}",
                                           style: const TextStyle(fontSize: 15, color: Colors.white)
                                         ),
                                         Text(
-                                          "Scribe Email ID: ${scribeData!['email']}",
+                                          "Email ID: ${scribeData!['email']}",
                                           style: const TextStyle(fontSize: 15, color: Colors.white)
                                         ),
                                         Text(
-                                          "Scribe UID: ${scribeData!['uid']}",
+                                          "UID: ${scribeData!['uid']}",
                                           style: const TextStyle(fontSize: 15, color: Colors.white)
                                         ),
                                         Text(
