@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:main/components/Card/scribeCard.dart';
+
 class ViewSwdRequests extends StatefulWidget {
   const ViewSwdRequests({super.key, this.email});
   final String? email;
@@ -10,8 +11,7 @@ class ViewSwdRequests extends StatefulWidget {
 }
 
 class _ViewSwdRequestsState extends State<ViewSwdRequests> {
-    
-  List<Map<String, dynamic>> listOfRequest =[];
+  List<Map<String, dynamic>> listOfRequest = [];
   Future<void> getRequests() async {
     print("\n scribe email id: ${widget.email.toString()}");
     print('\n');
@@ -22,10 +22,10 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
         .then((QuerySnapshot snapshot) {
       List<QueryDocumentSnapshot> documents = snapshot.docs;
       for (QueryDocumentSnapshot doc in documents) {
-        print(doc.data()); 
+        print(doc.data());
         final data = {'docid': doc.id, 'data': doc.data()};
         setState(() {
-        listOfRequest.add(data);
+          listOfRequest.add(data);
         });
       }
       print(
@@ -36,7 +36,6 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
     });
   }
 
-  
   @override
   void initState() {
     super.initState();
@@ -47,29 +46,27 @@ class _ViewSwdRequestsState extends State<ViewSwdRequests> {
   Widget build(BuildContext context) {
     return Container(
       child: RefreshIndicator(
-        onRefresh: () async{
+        onRefresh: () async {
           setState(() {
-          listOfRequest.clear();
+            listOfRequest.clear();
           });
           await getRequests();
         },
-        child: ListView(
-          children:[
-            listOfRequest==[] || listOfRequest.isEmpty?
-            const Center(child: Text("No Requests")):
-            Column(
-              children: List.generate(listOfRequest.length, (index) {
-                return ScribeCard(data:listOfRequest[index], index: index);
-              }),
-            ),
-          ],
-        ),
+        child: listOfRequest == [] || listOfRequest.isEmpty
+            ? const Center(child: Text("No Requests"))
+            : ListView(
+                children: [
+                  Column(
+                    children: List.generate(listOfRequest.length, (index) {
+                      return ScribeCard(
+                          data: listOfRequest[index], index: index);
+                    }),
+                  ),
+                ],
+              ),
       ),
     );
-      
-    
-    
-     
+
     // return Column(
     //   children: [
     //     const Center(

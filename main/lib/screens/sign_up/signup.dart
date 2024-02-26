@@ -24,9 +24,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   createUser() {
     if (toggleValue == false) {
       final colref =
-          FirebaseFirestore.instance.collection('SWD').doc(email.text);
+          FirebaseFirestore.instance.collection('SWD').doc(email.text.trim());
 
-      Map<String, dynamic> swdMap = {"email": email.text};
+      Map<String, dynamic> swdMap = {"email": email.text.trim()};
 
       colref
           .set(swdMap)
@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final colref =
           FirebaseFirestore.instance.collection('Scribes').doc(email.text);
 
-      Map<String, dynamic> scribesMap = {"email": email.text};
+      Map<String, dynamic> scribesMap = {"email": email.text.trim()};
 
       colref
           .set(scribesMap)
@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void registerUser(String email, String password) async {
     try {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
+          .createUserWithEmailAndPassword(email: email.trim(), password: password.trim())
           .then((value) {
         createUser();
         // Navigate user to details page

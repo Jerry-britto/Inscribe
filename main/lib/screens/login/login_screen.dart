@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> loginUser(String email, String password) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password)
+          .signInWithEmailAndPassword(email: email.trim(), password: password.trim())
           .then((value) async {
         print("User logged in");
 
