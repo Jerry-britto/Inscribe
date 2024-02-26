@@ -15,6 +15,8 @@ class ScribeCard extends StatefulWidget {
 
 class _ScribeCardState extends State<ScribeCard> {
   var _cardVisible = true;
+  
+
   // logic for accepting request
   Future<void> acceptRequest(int index) async {
     // setState(() {
@@ -151,12 +153,12 @@ class _ScribeCardState extends State<ScribeCard> {
                               'Type of Exam: ${widget.data!['data']['examData']['examType']}',
                               style: const TextStyle(fontSize: 15),
                             ),
-                            const Text(
-                              'Date and Time:',
-                              style: TextStyle(fontSize: 15),
+                            Text(
+                              'Date: ${widget.data!['data']['examData']['dateAndTime'].substring(0,10)}',
+                              style: const TextStyle(fontSize: 15),
                             ),
                             Text(
-                              '${widget.data!['data']['examData']['dateAndTime']}',
+                              'Time: ${widget.data!['data']['examData']['dateAndTime'].substring(11,19)}',
                               style: const TextStyle(fontSize: 15),
                             ),
                             const SizedBox(height: 10),
