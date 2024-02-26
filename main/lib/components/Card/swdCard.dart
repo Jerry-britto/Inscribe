@@ -85,7 +85,7 @@ class _SwdCardState extends State<SwdCard> {
             padding:
                 const EdgeInsets.only(right: 0, left: 15, top: 15, bottom: 5),
             width: 400,
-            height: 170,
+            height: 200,
             child: Row(
               children: [
                 Column(
@@ -118,7 +118,11 @@ class _SwdCardState extends State<SwdCard> {
                             style: TextStyle(fontSize: 15),
                           ),
                           Text(
-                            '${widget.data!['examData']['dateAndTime']}',
+                            '${widget.data!['examData']['dateAndTime'].substring(0,10)}',
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          Text(
+                            '${widget.data!['examData']['dateAndTime'].substring(11,19)}',
                             style: const TextStyle(fontSize: 15),
                           ),
                         ],

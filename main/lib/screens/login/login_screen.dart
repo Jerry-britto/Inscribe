@@ -207,6 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   hintText: "Enter Password",
                                   prefixIcon: const Icon(Icons.lock),
                                   suffixIcon: IconButton(
+                                      tooltip: "Show/Hide Password",
                                       onPressed: () {
                                         setState(() {
                                           isVisible = !isVisible;

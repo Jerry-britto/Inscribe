@@ -130,7 +130,7 @@ class _ScribeCardState extends State<ScribeCard> {
               padding: const EdgeInsets.only(
                   right: 15, left: 15, top: 15, bottom: 5),
               width: 400,
-              height: 180,
+              height: 200,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

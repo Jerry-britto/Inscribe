@@ -270,6 +270,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: "Enter Password",
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
+                                  tooltip: "Show/Hide Password",
                                     onPressed: () {
                                       setState(() {
                                         isVisible = !isVisible;
@@ -306,6 +307,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: "Enter Password",
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
+                                  tooltip: "Show/Hide Password",
                                     onPressed: () {
                                       setState(() {
                                         isVisible2 = !isVisible2;

@@ -192,6 +192,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                         CircleAvatar(
                           backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
                           child: IconButton(
+                              tooltip: "Edit Details",
                               iconSize: 32,
                               color: Colors.white,
                               onPressed: () {
