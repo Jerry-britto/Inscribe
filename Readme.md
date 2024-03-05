@@ -5,7 +5,7 @@
 ### Project Manger 
 Isha Tanna
 
-## Developers
+### Developers
 1. Johanna Rodrigues
 2. Jerry Britto
 
