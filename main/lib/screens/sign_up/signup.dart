@@ -65,7 +65,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void registerUser(String email, String password) async {
     try {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email.trim(), password: password.trim())
+          .createUserWithEmailAndPassword(
+              email: email.trim(), password: password.trim())
           .then((value) {
         createUser();
         // Navigate user to details page
@@ -100,12 +101,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         appBar: AppBar(
           title: const Text(
             "Create an Account",
-            style: TextStyle(
-              color: Colors.white,
-            ),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
+          automaticallyImplyLeading: false,
         ),
         body: GestureDetector(
           onTap: () {
@@ -125,23 +125,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                height: 100,
-                                child: Image.asset(
-                                  "assets/images/xaviers_logo.png",
-                                ),
-                              ),
-                              SizedBox(
-                                height: 100,
-                                child: Image.asset(
-                                  "assets/images/XRCVC.png",
-                                ),
-                              )
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          //   children: [
+                          //     SizedBox(
+                          //       height: 100,
+                          //       child: Image.asset(
+                          //         "assets/images/xaviers_logo.png",
+                          //       ),
+                          //     ),
+                          //     SizedBox(
+                          //       height: 100,
+                          //       child: Image.asset(
+                          //         "assets/images/XRCVC.png",
+                          //       ),
+                          //     )
+                          //   ],
+                          // ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -232,12 +232,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         color: Color.fromRGBO(162, 7, 48, 1),
                                         width: 3),
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 hintText: "Enter Email",
                                 prefixIcon: const Icon(Icons.mail)),
                           ),
@@ -261,12 +261,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         color: Color.fromRGBO(162, 7, 48, 1),
                                         width: 3),
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 hintText: "Enter Password",
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
@@ -297,22 +297,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         color: Color.fromRGBO(162, 7, 48, 1),
                                         width: 3),
-                                    borderRadius: BorderRadius.circular(20)),
-                                hintText: "Enter Password",
-                                prefixIcon: const Icon(Icons.lock),
+                                    borderRadius: BorderRadius.circular(10)),
+                                hintText: "Confirm Password",
+                                prefixIcon: const Icon(Icons.lock_clock_sharp),
                                 suffixIcon: IconButton(
                                     onPressed: () {
                                       setState(() {
                                         isVisible2 = !isVisible2;
                                       });
                                     },
-                                    icon:  Icon(isVisible2?
-                                        Icons.visibility:Icons.visibility_off))),
+                                    icon: Icon(isVisible2
+                                        ? Icons.visibility
+                                        : Icons.visibility_off))),
                             obscureText: isVisible2,
                           ),
                           const SizedBox(
@@ -350,15 +351,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               TextButton(
                                   onPressed: () {
                                     print("go to sign in");
-                                    Future.delayed(
-                                        const Duration(milliseconds: 600), () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginScreen(),
-                                        ),
-                                      );
-                                    });
+
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
+                                      ),
+                                    );
                                   },
                                   child: const Text(
                                     "Sign In",

@@ -79,11 +79,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(20)
+                          borderSide: const BorderSide(
+                              color: Color.fromRGBO(162, 7, 48, 1), width: 3),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         hintText: "Enter Email",
                         prefixIcon: const Icon(Icons.mail)),
@@ -93,10 +93,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   FloatingActionButton.extended(
                     backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
-                    onPressed: ()  {
-                      if(_formKey.currentState!.validate()){
-                       passwordReset(
-                          emailController.text.toLowerCase().trim());
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        passwordReset(
+                            emailController.text.toLowerCase().trim());
                       }
                     },
                     label: const Text(

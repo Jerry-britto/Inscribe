@@ -39,7 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> loginUser(String email, String password) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email.trim(), password: password.trim())
+          .signInWithEmailAndPassword(
+              email: email.trim(), password: password.trim())
           .then((value) async {
         print("User logged in");
 
@@ -103,9 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Welcome back", 
+            "Welcome back",
             style: TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.bold
             ),
           ),
           centerTitle: true,
@@ -130,23 +132,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  height: 100,
-                                  child: Image.asset(
-                                    "assets/images/xaviers_logo.png",
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 100,
-                                  child: Image.asset(
-                                    "assets/images/XRCVC.png",
-                                  ),
-                                )
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            //   children: [
+                            //     SizedBox(
+                            //       height: 100,
+                            //       child: Image.asset(
+                            //         "assets/images/xaviers_logo.png",
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       height: 100,
+                            //       child: Image.asset(
+                            //         "assets/images/XRCVC.png",
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -169,12 +171,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(10)),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           width: 3),
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(10)),
                                   hintText: "Enter Email",
                                   prefixIcon: const Icon(Icons.mail)),
                             ),
@@ -198,12 +200,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(10)),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: Color.fromRGBO(162, 7, 48, 1),
                                           width: 3),
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(10)),
                                   hintText: "Enter Password",
                                   prefixIcon: const Icon(Icons.lock),
                                   suffixIcon: IconButton(
@@ -212,8 +214,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           isVisible = !isVisible;
                                         });
                                       },
-                                      icon:  Icon(
-                                         isVisible?Icons.visibility:Icons.visibility_off))),
+                                      icon: Icon(isVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off))),
                               obscureText: isVisible,
                             ),
                             const SizedBox(
@@ -228,13 +231,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     setState(() => _isHovered = false),
                                 child: TextButton(
                                   onPressed: () {
-                                    Future.delayed(
-                                        const Duration(milliseconds: 600),
-                                        () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    const ForgotPasswordScreen())));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const ForgotPasswordScreen()));
                                   },
                                   child: Text(
                                     'Forgot Password',
@@ -279,14 +280,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Future.delayed(
-                                          const Duration(milliseconds: 100),
-                                          () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    const SignUpScreen()));
-                                      });
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const SignUpScreen()));
                                     },
                                     child: const Text(
                                       "Sign up",
