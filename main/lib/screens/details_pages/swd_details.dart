@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:main/screens/home/swd/swd_home.dart';
 
+import '../../components/Input/Dropdown.dart';
+
 class swdDetailsForm extends StatefulWidget {
   const swdDetailsForm({super.key, required this.emailText});
   final String emailText;
@@ -58,6 +60,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
   ];
 
   var _validationMessage = "";
+  var collegeName = "";
 
   dropDownValidate() {
     setState(() {
@@ -92,10 +95,15 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
       print("Failed to add details : $error");
     });
   }
+ void getCollegeName(college){
+    setState(() {
+      collegeName = college;
+    });
+    print("College selected $collegeName");
+  }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -106,10 +114,9 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
         ),
         title: const Text(
           "Details Form",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
         backgroundColor: const Color.fromRGBO(162, 7, 48, 1),
       ),
       body: Container(
@@ -131,45 +138,47 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          height: 100,
-                          child: Image.asset(
-                            "assets/images/xaviers_logo.png",
+                        // SizedBox(
+                        //   height: 100,
+                        //   child: Image.asset(
+                        //     "assets/images/xaviers_logo.png",
+                        //   ),
+                        // ),
+                        Flexible(
+                          child: Center(
+                            child: Text(
+                                "Welcome Dear Student! You are in the right place",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Color.fromRGBO(162, 7, 48, 1),
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: const Column(
-                              children: <Widget>[
-                                Center(
-                                  child: Text("Welcome Dear Student!",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          color: Color.fromRGBO(162, 7, 48, 1),
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                Center(
-                                  child: Text("You're in the",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          color: Color.fromRGBO(162, 7, 48, 1),
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                Center(
-                                  child: Text("Right Place!",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          color: Color.fromRGBO(162, 7, 48, 1),
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // const Column(
+                        //   children: <Widget>[
+                        //     Center(
+                        //       child: Text("Welcome Dear Student!",
+                        //           style: TextStyle(
+                        //               fontSize: 22,
+                        //               color: Color.fromRGBO(162, 7, 48, 1),
+                        //               fontWeight: FontWeight.bold)),
+                        //     ),
+                        //     Center(
+                        //       child: Text("You're in the",
+                        //           style: TextStyle(
+                        //               fontSize: 22,
+                        //               color: Color.fromRGBO(162, 7, 48, 1),
+                        //               fontWeight: FontWeight.bold)),
+                        //     ),
+                        //     Center(
+                        //       child: Text("Right Place!",
+                        //           style: TextStyle(
+                        //               fontSize: 22,
+                        //               color: Color.fromRGBO(162, 7, 48, 1),
+                        //               fontWeight: FontWeight.bold)),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
 
@@ -310,7 +319,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                             color: const Color.fromRGBO(77, 77, 77, 1)),
                         color: Colors.white,
                       ),
-                      child: 
+                      child:
                           // Column(
                           //     children: <Widget>[
                           //       const SizedBox(width: 10),
@@ -341,32 +350,31 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                           //     ],
                           //   )
                           Row(
-                              children: <Widget>[
-                                const SizedBox(width: 10),
-                                const Text(
-                                  "Year: ",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(162, 7, 48, 1),
-                                      fontSize: 20),
-                                ),
-                                  DropdownButton<String>(
-                                    dropdownColor: Colors.white,
-                                    style: const TextStyle(
-                                        color: Color.fromRGBO(162, 7, 48, 1)),
-                                    value: _yearValue,
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: yearItems.map((String year_items) {
-                                      return DropdownMenuItem(
-                                        value: year_items,
-                                        child: Text(year_items),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String? value) => setState(
-                                        () => _yearValue = value.toString()),
-                                  ),
-                              
-                              ],
-                            ),
+                        children: <Widget>[
+                          const SizedBox(width: 10),
+                          const Text(
+                            "Year: ",
+                            style: TextStyle(
+                                color: Color.fromRGBO(162, 7, 48, 1),
+                                fontSize: 20),
+                          ),
+                          DropdownButton<String>(
+                            dropdownColor: Colors.white,
+                            style: const TextStyle(
+                                color: Color.fromRGBO(162, 7, 48, 1)),
+                            value: _yearValue,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: yearItems.map((String year_items) {
+                              return DropdownMenuItem(
+                                value: year_items,
+                                child: Text(year_items),
+                              );
+                            }).toList(),
+                            onChanged: (String? value) =>
+                                setState(() => _yearValue = value.toString()),
+                          ),
+                        ],
+                      ),
                     ),
 
                     const SizedBox(
@@ -389,33 +397,33 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                                 color: Color.fromRGBO(162, 7, 48, 1),
                                 fontSize: 20),
                           ),
-                            DropdownButton<String>(
-                              dropdownColor: Colors.white,
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(162, 7, 48, 1)),
-                              value: _courseValue,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              items:
-                                  _yearValue == "FYJC" || _yearValue == "SYJC"
-                                      ? courseItems2.map((String items) {
-                                          return DropdownMenuItem(
-                                            value: items,
-                                            child: Text(items),
-                                          );
-                                        }).toList()
-                                      : courseItems1.map((String items) {
-                                          return DropdownMenuItem(
-                                            value: items,
-                                            child: Text(items),
-                                          );
-                                        }).toList(),
-                              onChanged: (String? value) => setState(
-                                  () => _courseValue = value.toString()),
-                              //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
-                            ),
+                          DropdownButton<String>(
+                            dropdownColor: Colors.white,
+                            style: const TextStyle(
+                                color: Color.fromRGBO(162, 7, 48, 1)),
+                            value: _courseValue,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: _yearValue == "FYJC" || _yearValue == "SYJC"
+                                ? courseItems2.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList()
+                                : courseItems1.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList(),
+                            onChanged: (String? value) =>
+                                setState(() => _courseValue = value.toString()),
+                            //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
+                          ),
                         ],
                       ),
                     ),
+                            Dropdown(onSelected: getCollegeName),
 
                     const SizedBox(
                       height: 20,
@@ -461,6 +469,8 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     const SizedBox(
                       height: 10,
                     ),
+
+                    const SizedBox(height: 10,),
                     Container(
                       padding: const EdgeInsets.all(9),
                       child: Row(

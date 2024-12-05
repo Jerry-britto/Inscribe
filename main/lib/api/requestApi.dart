@@ -16,7 +16,8 @@ class RequestApi {
 
   Future<void> findScribe(
       String examType, String subject, String examDate, String swdEmail) async {
-    SwdData = await getSwdData(swdEmail) as Map<String, dynamic>;
+    // SwdData = await getSwdData(swdEmail) as Map<String, dynamic>;
+    SwdData = await getSwdData(swdEmail);
     print(
         "Your examtype is ${examType} and your subject is ${subject} and date is ${examDate}");
     print(SwdData);
