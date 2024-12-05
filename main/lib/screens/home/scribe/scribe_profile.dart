@@ -203,7 +203,7 @@ class _ScribeProfileState extends State<ScribeProfile> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => DetailsForm2(
+                                          builder: (_) => scribeswdDetailsForm(
                                               emailText: widget.emailText
                                                   .toString())));
                                 });

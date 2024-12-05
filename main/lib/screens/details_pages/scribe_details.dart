@@ -4,23 +4,26 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:main/components/Input/Dropdown.dart';
 import 'package:main/screens/home/scribe/scribe_home.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 
-class DetailsForm2 extends StatefulWidget {
-  const DetailsForm2({super.key, required this.emailText});
+class scribeswdDetailsForm extends StatefulWidget {
+  const scribeswdDetailsForm({super.key, required this.emailText});
   final String emailText;
   @override
   // ignore: no_logic_in_create_state
-  State<DetailsForm2> createState() => _DetailsFormState2(emailText);
+  State<scribeswdDetailsForm> createState() => _swdDetailsFormState2(emailText);
 }
 
-class _DetailsFormState2 extends State<DetailsForm2> {
-  _DetailsFormState2(this.emailText);
+class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
+  _swdDetailsFormState2(this.emailText);
   String emailText;
   // bool enabled = false;
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
   final _email = TextEditingController();
+  final college_controller = MultiSelectController<String>();
   var _age = 0;
   var _uid = 0;
   var _contact = '';
@@ -55,7 +58,22 @@ class _DetailsFormState2 extends State<DetailsForm2> {
     'Commerce',
   ];
 
+    var collegeItems = [DropdownItem(label: 'St. Xaviers', value: 'St. Xaviers'), 
+    DropdownItem(label: 'KC', value: 'KC'),
+    DropdownItem(label: 'SIES', value: 'SIES'),
+    DropdownItem(label: 'ST. ANDREWS', value: 'ST. ANDREWS')];
+
+
   var _validationMessage = "";
+
+  var collegeName = "";
+
+  void getCollegeName(college){
+    setState(() {
+      collegeName = college;
+    });
+    print("College selected "+collegeName);
+  }
 
   dropDownValidate() {
     setState(() {
@@ -131,39 +149,23 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                SizedBox(
-                                  height: 100,
-                                  child: Image.asset(
-                                    "assets/images/xaviers_logo.png",
+                                // SizedBox(
+                                //   height: 100,
+                                //   child: Image.asset(
+                                //     "assets/images/xaviers_logo.png",
+                                //   ),
+                                // ),
+
+                                Flexible(
+                                  child: Center(
+                                    child: Text(
+                                        "Welcome Dear Scribe! Your contribution is greatly valued",
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            color:
+                                                Color.fromRGBO(162, 7, 48, 1),
+                                            fontWeight: FontWeight.bold)),
                                   ),
-                                ),
-                                const Column(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Text("Welcome Dear Scribe!",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color:
-                                                  Color.fromRGBO(162, 7, 48, 1),
-                                              fontWeight: FontWeight.bold)),
-                                    ),
-                                    Center(
-                                      child: Text("Your Contribution",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color:
-                                                  Color.fromRGBO(162, 7, 48, 1),
-                                              fontWeight: FontWeight.bold)),
-                                    ),
-                                    Center(
-                                      child: Text("is Greatly Valued!",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color:
-                                                  Color.fromRGBO(162, 7, 48, 1),
-                                              fontWeight: FontWeight.bold)),
-                                    ),
-                                  ],
                                 ),
                               ],
                             ),
@@ -326,7 +328,6 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         color: Color.fromRGBO(162, 7, 48, 1),
                                         fontSize: 20),
                                   ),
-                                  const SizedBox(width: 200),
                                   DropdownButton<String>(
                                     dropdownColor: Colors.white,
                                     style: const TextStyle(
@@ -366,7 +367,6 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                         color: Color.fromRGBO(162, 7, 48, 1),
                                         fontSize: 20),
                                   ),
-                                  const SizedBox(width: 150),
                                   DropdownButton<String>(
                                     dropdownColor: Colors.white,
                                     style: const TextStyle(
@@ -611,7 +611,84 @@ class _DetailsFormState2 extends State<DetailsForm2> {
                                     color: Color.fromRGBO(162, 7, 48, 1),
                                     fontSize: 12)),
                             const SizedBox(
-                              height: 30,
+                              height: 15,
+                            ),
+
+                            const Text(
+                              "College Details",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(162, 7, 48, 1),
+                                  decoration: TextDecoration.underline),
+                            ),
+
+                            Dropdown(onSelected: getCollegeName),
+
+                            Container(
+                              decoration: BoxDecoration(color: Colors.white),
+                              child: MultiDropdown<String>(
+                                                      items: collegeItems,
+                                                      controller: college_controller,
+                                                      enabled: true,
+                                                      searchEnabled: true,
+                                                      chipDecoration: const ChipDecoration(
+                                                        backgroundColor: Colors.yellow,
+                                                        wrap: true,
+                                                        runSpacing: 2,
+                                                        spacing: 10,
+                                                      ),
+                                                      fieldDecoration: FieldDecoration(
+                                                        hintText: 'Colleges',
+                                                        hintStyle: const TextStyle(color: Colors.black87),
+                                                        prefixIcon: const Icon(Icons.flag),
+                                                        showClearIcon: false,
+                                                        border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Colors.grey),
+                                                        ),
+                                                        focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Colors.black87,
+                              ),
+                                                        ),
+                                                      ),
+                                                      dropdownDecoration: const DropdownDecoration(
+                                                        marginTop: 2,
+                                                        maxHeight: 500,
+                                                        header: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                'Select Colleges from the list',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                                                        ),
+                                                      ),
+                                                      dropdownItemDecoration: DropdownItemDecoration(
+                                                        selectedIcon:
+                                const Icon(Icons.check_box, color: Colors.green),
+                                                        disabledIcon:
+                                Icon(Icons.lock, color: Colors.grey.shade300),
+                                                      ),
+                                                      validator: (value) {
+                                                        if (value == null || value.isEmpty) {
+                              return 'Please select a country';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      onSelectionChange: (selectedItems) {
+                                                        debugPrint("OnSelectionChange: $selectedItems");
+                                                      },
+                                                    ),
+                            ),
+
+
+                            const SizedBox(
+                              height: 20,
                             ),
 
                             const Text(

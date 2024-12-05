@@ -6,16 +6,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:main/screens/home/swd/swd_home.dart';
 
-class DetailsForm extends StatefulWidget {
-  const DetailsForm({super.key, required this.emailText});
+class swdDetailsForm extends StatefulWidget {
+  const swdDetailsForm({super.key, required this.emailText});
   final String emailText;
   @override
   // ignore: no_logic_in_create_state
-  State<DetailsForm> createState() => _DetailsFormState(emailText);
+  State<swdDetailsForm> createState() => _swdDetailsFormState(emailText);
 }
 
-class _DetailsFormState extends State<DetailsForm> {
-  _DetailsFormState(this.emailText);
+class _swdDetailsFormState extends State<swdDetailsForm> {
+  _swdDetailsFormState(this.emailText);
   String emailText;
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
@@ -95,6 +95,7 @@ class _DetailsFormState extends State<DetailsForm> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -309,35 +310,63 @@ class _DetailsFormState extends State<DetailsForm> {
                             color: const Color.fromRGBO(77, 77, 77, 1)),
                         color: Colors.white,
                       ),
-                      child: Row(
-                        children: <Widget>[
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Year: ",
-                            style: TextStyle(
-                                color: Color.fromRGBO(162, 7, 48, 1),
-                                fontSize: 20),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 150),
-                            child: DropdownButton<String>(
-                              dropdownColor: Colors.white,
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(162, 7, 48, 1)),
-                              value: _yearValue,
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              items: yearItems.map((String year_items) {
-                                return DropdownMenuItem(
-                                  value: year_items,
-                                  child: Text(year_items),
-                                );
-                              }).toList(),
-                              onChanged: (String? value) =>
-                                  setState(() => _yearValue = value.toString()),
+                      child: 
+                          // Column(
+                          //     children: <Widget>[
+                          //       const SizedBox(width: 10),
+                          //       const Text(
+                          //         "Year: ",
+                          //         style: TextStyle(
+                          //             color: Color.fromRGBO(162, 7, 48, 1),
+                          //             fontSize: 20),
+                          //       ),
+                          //       Padding(
+                          //         padding: const EdgeInsets.only(left: 150),
+                          //         child: DropdownButton<String>(
+                          //           dropdownColor: Colors.white,
+                          //           style: const TextStyle(
+                          //               color: Color.fromRGBO(162, 7, 48, 1)),
+                          //           value: _yearValue,
+                          //           icon: const Icon(Icons.keyboard_arrow_down),
+                          //           items: yearItems.map((String year_items) {
+                          //             return DropdownMenuItem(
+                          //               value: year_items,
+                          //               child: Text(year_items),
+                          //             );
+                          //           }).toList(),
+                          //           onChanged: (String? value) => setState(
+                          //               () => _yearValue = value.toString()),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   )
+                          Row(
+                              children: <Widget>[
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "Year: ",
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(162, 7, 48, 1),
+                                      fontSize: 20),
+                                ),
+                                  DropdownButton<String>(
+                                    dropdownColor: Colors.white,
+                                    style: const TextStyle(
+                                        color: Color.fromRGBO(162, 7, 48, 1)),
+                                    value: _yearValue,
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: yearItems.map((String year_items) {
+                                      return DropdownMenuItem(
+                                        value: year_items,
+                                        child: Text(year_items),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? value) => setState(
+                                        () => _yearValue = value.toString()),
+                                  ),
+                              
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                     ),
 
                     const SizedBox(
@@ -360,9 +389,7 @@ class _DetailsFormState extends State<DetailsForm> {
                                 color: Color.fromRGBO(162, 7, 48, 1),
                                 fontSize: 20),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 126),
-                            child: DropdownButton<String>(
+                            DropdownButton<String>(
                               dropdownColor: Colors.white,
                               style: const TextStyle(
                                   color: Color.fromRGBO(162, 7, 48, 1)),
@@ -386,7 +413,6 @@ class _DetailsFormState extends State<DetailsForm> {
                                   () => _courseValue = value.toString()),
                               //validator: (value) => value == "Select" ? ' Please Select a Valid Option' : null,
                             ),
-                          ),
                         ],
                       ),
                     ),

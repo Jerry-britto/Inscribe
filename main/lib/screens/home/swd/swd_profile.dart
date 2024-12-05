@@ -213,7 +213,7 @@ class _SwdProfileState extends State<SwdProfile> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => DetailsForm(
+                                          builder: (_) => swdDetailsForm(
                                               emailText: widget.emailText
                                                   .toString())));
                                 });
