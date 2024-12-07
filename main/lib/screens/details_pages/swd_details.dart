@@ -60,7 +60,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
   ];
 
   var _validationMessage = "";
-  var collegeName = "";
+  var collegeName = "SELECT";
 
   dropDownValidate() {
     setState(() {
@@ -84,7 +84,8 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
       "course": _courseValue.toLowerCase(),
       "disability": _disability.text,
       "phoneNo": _contact,
-      "imageUrl": imageUrl
+      "imageUrl": imageUrl,
+      "collegeName":collegeName
     };
 
     colref.doc(_email.text).set(swdMap).then((value) {
@@ -751,6 +752,22 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                       ),
                       onPressed: () {
                         dropDownValidate();
+                           if (collegeName == 'SELECT') {
+                                  showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                            title: const Text(
+                                                "Do select your institute name"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ));
+                                  return;
+                                }
                         if (uploadStatus) {
                           showDialog(
                               context: context,

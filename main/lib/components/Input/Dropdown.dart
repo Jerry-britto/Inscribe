@@ -9,7 +9,7 @@ class Dropdown extends StatefulWidget {
   State<Dropdown> createState() => _DropdownState();
 }
 
-  const List<String> list = <String>['St. Xaviers', 'KC','SIES','ST. ANDREWS'];
+  const List<String> list = <String>['SELECT','St. Xaviers', 'KC','SIES','ST. ANDREWS'];
 class _DropdownState extends State<Dropdown> {
 
     String dropdownValue = list.first;

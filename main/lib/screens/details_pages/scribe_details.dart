@@ -58,21 +58,24 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
     'Commerce',
   ];
 
-    var collegeItems = [DropdownItem(label: 'St. Xaviers', value: 'St. Xaviers'), 
+  var collegeItems = [
+    DropdownItem(label: 'St. Xaviers', value: 'St. Xaviers'),
     DropdownItem(label: 'KC', value: 'KC'),
     DropdownItem(label: 'SIES', value: 'SIES'),
-    DropdownItem(label: 'ST. ANDREWS', value: 'ST. ANDREWS')];
+    DropdownItem(label: 'ST. ANDREWS', value: 'ST. ANDREWS')
+  ];
 
+  var centresList = [];
 
   var _validationMessage = "";
 
-  var collegeName = "";
+  var collegeName = "SELECT";
 
-  void getCollegeName(college){
+  void getCollegeName(college) {
     setState(() {
       collegeName = college;
     });
-    print("College selected "+collegeName);
+    print("College selected " + collegeName);
   }
 
   dropDownValidate() {
@@ -98,6 +101,8 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
       "course": _courseValue.toLowerCase(),
       "phoneNo": _contact.toLowerCase(),
       "imageUrl": imageUrl,
+      "collegeName": collegeName,
+      "centres": centresList
     };
 
     colref.doc(_email.text).set(scribesMap).then((value) {
@@ -627,65 +632,70 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             Container(
                               decoration: BoxDecoration(color: Colors.white),
                               child: MultiDropdown<String>(
-                                                      items: collegeItems,
-                                                      controller: college_controller,
-                                                      enabled: true,
-                                                      searchEnabled: true,
-                                                      chipDecoration: const ChipDecoration(
-                                                        backgroundColor: Colors.yellow,
-                                                        wrap: true,
-                                                        runSpacing: 2,
-                                                        spacing: 10,
-                                                      ),
-                                                      fieldDecoration: FieldDecoration(
-                                                        hintText: 'Colleges',
-                                                        hintStyle: const TextStyle(color: Colors.black87),
-                                                        prefixIcon: const Icon(Icons.flag),
-                                                        showClearIcon: false,
-                                                        border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: Colors.grey),
-                                                        ),
-                                                        focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Colors.black87,
-                              ),
-                                                        ),
-                                                      ),
-                                                      dropdownDecoration: const DropdownDecoration(
-                                                        marginTop: 2,
-                                                        maxHeight: 500,
-                                                        header: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Text(
-                                'Select Colleges from the list',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                items: collegeItems,
+                                controller: college_controller,
+                                enabled: true,
+                                searchEnabled: true,
+                                chipDecoration: const ChipDecoration(
+                                  backgroundColor: Colors.yellow,
+                                  wrap: true,
+                                  runSpacing: 2,
+                                  spacing: 10,
                                 ),
+                                fieldDecoration: FieldDecoration(
+                                  hintText: 'Colleges',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.black87),
+                                  prefixIcon: const Icon(Icons.flag),
+                                  showClearIcon: false,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide:
+                                        const BorderSide(color: Colors.grey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: const BorderSide(
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                                dropdownDecoration: const DropdownDecoration(
+                                  marginTop: 2,
+                                  maxHeight: 500,
+                                  header: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Text(
+                                      'Select Colleges from the list',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                dropdownItemDecoration: DropdownItemDecoration(
+                                  selectedIcon: const Icon(Icons.check_box,
+                                      color: Colors.green),
+                                  disabledIcon: Icon(Icons.lock,
+                                      color: Colors.grey.shade300),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please select a college';
+                                  }
+                                  return null;
+                                },
+                                onSelectionChange: (selectedItems) {
+                                  setState(() {
+                                    centresList = selectedItems;
+                                  });
+                                  debugPrint(
+                                      "OnSelectionChange: $selectedItems");
+                                },
                               ),
-                                                        ),
-                                                      ),
-                                                      dropdownItemDecoration: DropdownItemDecoration(
-                                                        selectedIcon:
-                                const Icon(Icons.check_box, color: Colors.green),
-                                                        disabledIcon:
-                                Icon(Icons.lock, color: Colors.grey.shade300),
-                                                      ),
-                                                      validator: (value) {
-                                                        if (value == null || value.isEmpty) {
-                              return 'Please select a country';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      onSelectionChange: (selectedItems) {
-                                                        debugPrint("OnSelectionChange: $selectedItems");
-                                                      },
-                                                    ),
                             ),
-
 
                             const SizedBox(
                               height: 20,
@@ -801,6 +811,22 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                   return;
                                 }
                                 dropDownValidate();
+                                if (collegeName == 'SELECT') {
+                                  showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                            title: const Text(
+                                                "Do select your institute name"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ));
+                                  return;
+                                }
                                 if ((_formKey.currentState!.validate() ==
                                         true) &&
                                     (_validationMessage == "")) {
