@@ -8,37 +8,35 @@ class SwdRequests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("Requests")
-            .where("swdId", isEqualTo: email.toString())
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return const Center(child: Text("An error occurred while fetching requests."));
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text("No Requests"));
-          }
-
-          final List<Map<String, dynamic>> listOfRequests = snapshot.data!.docs.map((doc) {
-            return doc.data() as Map<String, dynamic>;
-          }).toList();
-
-          return ListView.builder(
-            itemCount: listOfRequests.length,
-            itemBuilder: (context, index) {
-              return SwdCard(data: listOfRequests[index]);
-            },
-          );
-        },
-      ),
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection("Requests")
+          .where("swdId", isEqualTo: email.toString())
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+    
+        if (snapshot.hasError) {
+          return const Center(child: Text("An error occurred while fetching requests."));
+        }
+    
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(child: Text("No Requests"));
+        }
+    
+        final List<Map<String, dynamic>> listOfRequests = snapshot.data!.docs.map((doc) {
+          return doc.data() as Map<String, dynamic>;
+        }).toList();
+    
+        return ListView.builder(
+          itemCount: listOfRequests.length,
+          itemBuilder: (context, index) {
+            return SwdCard(data: listOfRequests[index]);
+          },
+        );
+      },
     );
   }
 }

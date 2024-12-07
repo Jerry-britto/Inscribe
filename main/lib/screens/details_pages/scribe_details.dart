@@ -190,7 +190,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             ),
                             //  Name Field
                             TextFormField(
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 labelText: "Name",
                                 hintText: "Enter Full Name",
                                 labelStyle: TextStyle(
@@ -201,13 +201,13 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -242,7 +242,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 hintText: "Enter Age",
                                 hintStyle: TextStyle(fontSize: 15),
                                 labelText: "Age",
@@ -253,13 +253,13 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -288,7 +288,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 hintText: "Enter UID (Roll No for JC)",
                                 hintStyle: TextStyle(fontSize: 15),
                                 labelText: "UID / Roll No",
@@ -299,13 +299,13 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -319,7 +319,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
 
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
+                                borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                     color: const Color.fromRGBO(77, 77, 77, 1)),
                                 color: Colors.white,
@@ -358,7 +358,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
 
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
+                                borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                     color: const Color.fromRGBO(77, 77, 77, 1)),
                                 color: Colors.white,
@@ -717,7 +717,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                               controller: _email,
                               enabled: false,
                               readOnly: true,
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 labelText: "Email",
                                 labelStyle: TextStyle(
                                     fontSize: 20,
@@ -726,7 +726,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 fillColor: Colors.white,
                                 disabledBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
@@ -756,7 +756,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 labelText: "Phone No",
                                 hintText: "Enter Phone No.",
                                 labelStyle: TextStyle(
@@ -767,13 +767,13 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                                      BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),

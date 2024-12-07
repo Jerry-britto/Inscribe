@@ -85,7 +85,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
       "disability": _disability.text,
       "phoneNo": _contact,
       "imageUrl": imageUrl,
-      "collegeName":collegeName
+      "collegeName": collegeName
     };
 
     colref.doc(_email.text).set(swdMap).then((value) {
@@ -96,7 +96,8 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
       print("Failed to add details : $error");
     });
   }
- void getCollegeName(college){
+
+  void getCollegeName(college) {
     setState(() {
       collegeName = college;
     });
@@ -198,7 +199,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     ),
                     //  Name Field
                     TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Name",
                         hintText: "Enter Full Name",
                         labelStyle: TextStyle(
@@ -207,12 +208,12 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                               width: 1.5, color: Color.fromRGBO(162, 7, 48, 1)),
                         ),
@@ -246,7 +247,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Enter Age",
                         hintStyle: TextStyle(fontSize: 15),
                         labelText: "Age",
@@ -255,12 +256,12 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                               width: 1.5, color: Color.fromRGBO(162, 7, 48, 1)),
                         ),
@@ -288,7 +289,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Enter UID (Roll No for JC)",
                         hintStyle: TextStyle(fontSize: 15),
                         labelText: "UID / Roll No",
@@ -297,12 +298,12 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                               width: 1.5, color: Color.fromRGBO(162, 7, 48, 1)),
                         ),
@@ -315,7 +316,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
 
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                             color: const Color.fromRGBO(77, 77, 77, 1)),
                         color: Colors.white,
@@ -384,7 +385,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
 
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                             color: const Color.fromRGBO(77, 77, 77, 1)),
                         color: Colors.white,
@@ -424,14 +425,14 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         ],
                       ),
                     ),
-                            Dropdown(onSelected: getCollegeName),
+                    Dropdown(onSelected: getCollegeName),
 
                     const SizedBox(
                       height: 20,
                     ),
 
                     TextFormField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Disability",
                         hintText: "Enter Disability",
                         labelStyle: TextStyle(
@@ -440,12 +441,12 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                               width: 1.5, color: Color.fromRGBO(162, 7, 48, 1)),
                         ),
@@ -471,7 +472,9 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                       height: 10,
                     ),
 
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       padding: const EdgeInsets.all(9),
                       child: Row(
@@ -681,14 +684,14 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                       controller: _email,
                       enabled: false,
                       readOnly: true,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Email",
                         labelStyle: TextStyle(
                             fontSize: 20, color: Color.fromRGBO(162, 7, 48, 1)),
                         filled: true,
                         fillColor: Colors.white,
                         disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
@@ -718,7 +721,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Phone No",
                         hintText: "Enter Phone No.",
                         labelStyle: TextStyle(
@@ -727,12 +730,12 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(color: Color.fromRGBO(71, 71, 71, 1)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                               width: 1.5, color: Color.fromRGBO(162, 7, 48, 1)),
                         ),
@@ -752,22 +755,22 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                       ),
                       onPressed: () {
                         dropDownValidate();
-                           if (collegeName == 'SELECT') {
-                                  showDialog(
-                                      context: context,
-                                      builder: (_) => AlertDialog(
-                                            title: const Text(
-                                                "Do select your institute name"),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'OK'),
-                                                child: const Text('OK'),
-                                              ),
-                                            ],
-                                          ));
-                                  return;
-                                }
+                        if (collegeName == 'SELECT') {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    title: const Text(
+                                        "Do select your institute name"),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
                         if (uploadStatus) {
                           showDialog(
                               context: context,
