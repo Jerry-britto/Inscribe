@@ -51,16 +51,6 @@ class _ScribeProfileState extends State<ScribeProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          data!["name"] != null ? data!['name'] : '',
-                          style: const TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w400),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: data!.containsKey("imageUrl") &&
@@ -87,11 +77,11 @@ class _ScribeProfileState extends State<ScribeProfile> {
                           width: 20,
                         ),
                         Text(
-                          "Category :",
+                          "Name :",
                           style: customTextStyle,
                         ),
                         Text(
-                          " Scribe",
+                          data!["name"],
                           style: customTextStyle,
                         ),
                       ],
@@ -205,7 +195,15 @@ class _ScribeProfileState extends State<ScribeProfile> {
                                       MaterialPageRoute(
                                           builder: (_) => scribeswdDetailsForm(
                                               emailText: widget.emailText
-                                                  .toString())));
+                                                  .toString(),
+                                                  currentName: data!["name"],
+                                                  currentAge: data!["age"].toString(),
+                                                  currentUid: data!["uid"].toString(),
+                                                  currentCourse: data!['course'].toString(),
+                                                  currentYear: data!["year"].toString(),
+                                                  currentPhone: data!["phoneNo"].toString(),
+                                                  currentCollegeName: data!["collegeName"],
+                                                  )));
                                 });
                               },
                               icon: Image.asset(

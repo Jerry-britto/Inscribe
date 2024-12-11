@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 
 class Dropdown extends StatefulWidget {
-  
-  Dropdown({super.key, required this.onSelected});
+  const Dropdown({super.key, required this.onSelected, this.defaultOption});
   final Function(String) onSelected;
-
+  final String? defaultOption;
   @override
   State<Dropdown> createState() => _DropdownState();
 }
 
-  const List<String> list = <String>['SELECT','St. Xaviers', 'KC','SIES','ST. ANDREWS'];
-class _DropdownState extends State<Dropdown> {
+const List<String> list = <String>[
+  'SELECT',
+  'St. Xaviers',
+  'KC',
+  'SIES',
+  'ST. ANDREWS'
+];
 
-    String dropdownValue = list.first;
+class _DropdownState extends State<Dropdown> {
+  String dropdownValue = list.first;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.defaultOption != null) {
+      setState(() {
+        dropdownValue = widget.defaultOption.toString();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  DropdownButton<String>(
+    return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,

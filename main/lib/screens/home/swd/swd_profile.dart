@@ -65,8 +65,14 @@ class _SwdProfileState extends State<SwdProfile> {
                           borderRadius: BorderRadius.circular(100),
                           child: data!.containsKey("imageUrl") &&
                                   data!["imageUrl"] != ""
-                              ? 
-                              FadeInImage(placeholder:  AssetImage("assets/images/dummyAvatar.png"), image: NetworkImage(data!['imageUrl']),height: 150,width: 150,fit: BoxFit.cover,)
+                              ? FadeInImage(
+                                  placeholder: AssetImage(
+                                      "assets/images/dummyAvatar.png"),
+                                  image: NetworkImage(data!['imageUrl']),
+                                  height: 150,
+                                  width: 150,
+                                  fit: BoxFit.cover,
+                                )
                               : const Icon(
                                   Icons.person,
                                   color: Color.fromRGBO(162, 7, 48, 1),
@@ -214,8 +220,23 @@ class _SwdProfileState extends State<SwdProfile> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => swdDetailsForm(
-                                              emailText: widget.emailText
-                                                  .toString())));
+                                                emailText:
+                                                    widget.emailText.toString(),
+                                                currentDisability:
+                                                    "${data?['disability'].toString()}",
+                                                currentAge: data!["age"],
+                                                currentName: data!["name"],
+                                                currentUid:
+                                                    data!["uid"].toString(),
+                                                currentContact:
+                                                    data!["phoneNo"].toString(),
+                                                currentProfilePhoto:
+                                                    data!["imageUrl"],
+                                                currentCollegeName: 'SIES',
+                                                    // data!["collegeName"],
+                                                currentCourse: data!['course'],
+                                                currentYear: data!['year'], 
+                                              )));
                                 });
                                 // print();
                               },

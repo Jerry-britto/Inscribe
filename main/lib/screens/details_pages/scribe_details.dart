@@ -9,8 +9,20 @@ import 'package:main/screens/home/scribe/scribe_home.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 
 class scribeswdDetailsForm extends StatefulWidget {
-  const scribeswdDetailsForm({super.key, required this.emailText});
+   scribeswdDetailsForm(
+      {super.key,
+      required this.emailText,
+      this.currentName,
+      this.currentAge,
+      this.currentUid,
+      this.currentCourse,
+      this.currentYear,
+      this.currentPhone,
+      this.currentCollegeName,
+      this.currentCentres});
   final String emailText;
+  final String? currentName, currentAge, currentUid, currentYear, currentCourse,currentPhone, currentCollegeName;
+  List<String>? currentCentres;
   @override
   // ignore: no_logic_in_create_state
   State<scribeswdDetailsForm> createState() => _swdDetailsFormState2(emailText);
@@ -23,6 +35,9 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
   final _email = TextEditingController();
+  final __age = TextEditingController();
+  final __uid = TextEditingController();
+  final phoneController = TextEditingController();
   final college_controller = MultiSelectController<String>();
   var _age = 0;
   var _uid = 0;
@@ -98,13 +113,13 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
       "age": _age,
       "uid": _uid,
       "year": _yearValue,
-      "course": _courseValue.toLowerCase(),
+      "course": _courseValue,
       "phoneNo": _contact.toLowerCase(),
       "imageUrl": imageUrl,
       "collegeName": collegeName,
       "centres": centresList
     };
-
+    print("Scribe Details: $scribesMap");
     colref.doc(_email.text).set(scribesMap).then((value) {
       print("Details Added");
       Navigator.pushReplacement(context,
@@ -190,7 +205,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             ),
                             //  Name Field
                             TextFormField(
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: "Name",
                                 hintText: "Enter Full Name",
                                 labelStyle: TextStyle(
@@ -200,14 +215,12 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -226,6 +239,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             ),
                             //  Age Field
                             TextFormField(
+                              controller: __age,
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 // Update _age whenever the text changes
@@ -242,7 +256,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Enter Age",
                                 hintStyle: TextStyle(fontSize: 15),
                                 labelText: "Age",
@@ -252,14 +266,12 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -272,6 +284,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             ),
 
                             TextFormField(
+                              controller: __uid,
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 // Update _uid whenever the text changes
@@ -288,7 +301,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: "Enter UID (Roll No for JC)",
                                 hintStyle: TextStyle(fontSize: 15),
                                 labelText: "UID / Roll No",
@@ -298,14 +311,12 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -627,7 +638,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                   decoration: TextDecoration.underline),
                             ),
 
-                            Dropdown(onSelected: getCollegeName),
+                            Dropdown(onSelected: getCollegeName,defaultOption: collegeName,),
 
                             Container(
                               decoration: BoxDecoration(color: Colors.white),
@@ -717,7 +728,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                               controller: _email,
                               enabled: false,
                               readOnly: true,
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: "Email",
                                 labelStyle: TextStyle(
                                     fontSize: 20,
@@ -725,8 +736,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 disabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
@@ -737,6 +747,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             ),
                             //  Contact no. Field
                             TextFormField(
+                              controller: phoneController,
                               keyboardType: TextInputType.phone,
                               onChanged: (value) {
                                 // Update _age whenever the text changes
@@ -756,7 +767,7 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 }
                                 return null;
                               },
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: "Phone No",
                                 hintText: "Enter Phone No.",
                                 labelStyle: TextStyle(
@@ -766,14 +777,12 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(71, 71, 71, 1)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
                                       width: 1.5,
                                       color: Color.fromRGBO(162, 7, 48, 1)),
@@ -787,11 +796,10 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
                             // Submit Form Button
                             ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                     const Color.fromRGBO(162, 7, 48, 1)),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
+                                foregroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               onPressed: () {
                                 if (uploadStatus) {
@@ -852,5 +860,43 @@ class _swdDetailsFormState2 extends State<scribeswdDetailsForm> {
     super.initState();
 
     _email.text = emailText;
+    if (widget.currentName != null) {
+      _name.text = widget.currentName.toString();
+    }
+    if (widget.currentAge != null) {
+      __age.text = widget.currentAge.toString();
+      setState(() {
+        _age = int.parse(widget.currentAge.toString());
+      });
+    }
+
+    if (widget.currentUid != null) {
+      __uid.text = widget.currentUid.toString();
+      setState(() {
+        _uid = int.parse(widget.currentUid.toString());
+      });
+    }
+
+    if (widget.currentYear != null) {
+      _yearValue = widget.currentYear.toString();
+    }
+
+    if (widget.currentCourse != null) {
+      _courseValue = widget.currentCourse.toString();
+    }
+
+    if (widget.currentPhone != null) {
+      _contact = widget.currentPhone.toString();
+      phoneController.text = widget.currentPhone.toString();
+    }
+
+    if (widget.currentCollegeName != null) {
+      setState(() {
+        
+      collegeName = widget.currentCollegeName.toString();
+      });
+    }
+
+    
   }
 }

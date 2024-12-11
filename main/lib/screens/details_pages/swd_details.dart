@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,32 @@ import 'package:main/screens/home/swd/swd_home.dart';
 import '../../components/Input/Dropdown.dart';
 
 class swdDetailsForm extends StatefulWidget {
-  const swdDetailsForm({super.key, required this.emailText});
+  const swdDetailsForm(
+      {super.key,
+      required this.emailText,
+      this.currentName,
+      this.currentDisability,
+      this.currentUid,
+      this.currentYear,
+      this.currentCourse,
+      this.currentAge,
+      this.currentContact,
+      this.currentCollegeName,
+      this.currentProfilePhoto});
+
   final String emailText;
+
+  final String? currentDisability,
+      currentUid,
+      currentYear,
+      currentCourse,
+      currentContact,
+      currentName,
+      currentProfilePhoto,
+      currentCollegeName;
+
+  final int? currentAge;
+
   @override
   // ignore: no_logic_in_create_state
   State<swdDetailsForm> createState() => _swdDetailsFormState(emailText);
@@ -20,9 +45,14 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
   _swdDetailsFormState(this.emailText);
   String emailText;
   final _formKey = GlobalKey<FormState>();
+
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _disability = TextEditingController();
+  final __ageController = TextEditingController();
+  final __uidController = TextEditingController();
+  final ___phoneController = TextEditingController();
+
   var _age = 0;
   String imageUrl = "";
   var _uid = 0;
@@ -81,7 +111,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
       "age": _age,
       "uid": _uid,
       "year": _yearValue,
-      "course": _courseValue.toLowerCase(),
+      "course": _courseValue,
       "disability": _disability.text,
       "phoneNo": _contact,
       "imageUrl": imageUrl,
@@ -231,6 +261,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     ),
                     //  Age Field
                     TextFormField(
+                      controller: __ageController,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         // Update _age whenever the text changes
@@ -273,6 +304,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     ),
 
                     TextFormField(
+                      controller: __uidController,
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
                         // Update _uid whenever the text changes
@@ -366,10 +398,10 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                                 color: Color.fromRGBO(162, 7, 48, 1)),
                             value: _yearValue,
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items: yearItems.map((String year_items) {
+                            items: yearItems.map((String yearItems) {
                               return DropdownMenuItem(
-                                value: year_items,
-                                child: Text(year_items),
+                                value: yearItems,
+                                child: Text(yearItems),
                               );
                             }).toList(),
                             onChanged: (String? value) =>
@@ -425,7 +457,10 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                         ],
                       ),
                     ),
-                    Dropdown(onSelected: getCollegeName),
+                    Dropdown(
+                      onSelected: getCollegeName,
+                      defaultOption: widget.currentCollegeName,
+                    ),
 
                     const SizedBox(
                       height: 20,
@@ -702,6 +737,7 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     ),
                     //  Contact no. Field
                     TextFormField(
+                      controller: ___phoneController,
                       keyboardType: TextInputType.phone,
                       onChanged: (value) {
                         // Update _age whenever the text changes
@@ -748,10 +784,10 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
                     // Submit Form Button
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                             const Color.fromRGBO(162, 7, 48, 1)),
                         foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
+                            WidgetStateProperty.all<Color>(Colors.white),
                       ),
                       onPressed: () {
                         dropDownValidate();
@@ -811,5 +847,59 @@ class _swdDetailsFormState extends State<swdDetailsForm> {
     super.initState();
 
     _email.text = emailText;
+    if (widget.currentDisability != null) {
+      _disability.text = widget.currentDisability.toString();
+    }
+    if (widget.currentAge != null) {
+      __ageController.text = widget.currentAge.toString();
+      setState(() {
+        _age = int.parse(widget.currentAge.toString());
+      });
+    }
+
+    if (widget.currentUid != null) {
+      __uidController.text = widget.currentUid.toString();
+      setState(() {
+        _uid = int.parse(widget.currentUid.toString());
+      });
+    }
+
+    if (widget.currentContact != null) {
+      ___phoneController.text = widget.currentContact.toString();
+      _contact = widget.currentContact.toString();
+    }
+
+    if (widget.currentName != null) {
+      _name.text = widget.currentName.toString();
+    }
+
+    if (widget.currentProfilePhoto != null &&
+        widget.currentProfilePhoto.toString() != "") {
+      print("Profile Photo: ${widget.currentProfilePhoto}");
+      imageUrl = widget.currentProfilePhoto.toString();
+      print("uploaded picture: ${imageUrl}");
+      setState(() {
+        uploadLabel = "Image Uploaded";
+      });
+    }
+
+    if (widget.currentCollegeName != null) {
+      setState(() {
+        collegeName = widget.currentCollegeName.toString();
+        print("updated college name");
+      });
+    }
+
+    if (widget.currentYear != null) {
+      setState(() {
+        _yearValue = widget.currentYear.toString();
+      });
+    }
+
+    if (widget.currentCourse != null) {
+      setState(() {
+        _courseValue = widget.currentCourse.toString();
+      });
+    }
   }
 }
